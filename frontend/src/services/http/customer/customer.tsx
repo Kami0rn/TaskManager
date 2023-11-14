@@ -1,7 +1,7 @@
 import { CustomerInterface } from "../../../interfaces/Icustomer";
 
 
-const apiUrl = "http://localhost:8082";
+const apiUrl = "http://localhost:8080";
 
 
 async function GetCustomers() {

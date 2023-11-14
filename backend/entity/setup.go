@@ -22,7 +22,7 @@ func DB() *gorm.DB {
 
 func SetupDatabase() {
 
-	database, err := gorm.Open(sqlite.Open("SoyJuuProject"), &gorm.Config{})
+	database, err := gorm.Open(sqlite.Open("TaskManager"), &gorm.Config{})
 
 	if err != nil {
 
