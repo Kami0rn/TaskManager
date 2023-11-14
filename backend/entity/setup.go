@@ -34,7 +34,7 @@ func SetupDatabase() {
 
 	database.AutoMigrate(
 		&Customer{},
-		&Request{},
+		
 		
 	 )
 
