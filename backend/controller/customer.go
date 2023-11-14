@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 
-	"github.com/Kami0rn/Carne/entity"
+	"github.com/Kami0rn/TaskManager/entity"
 	"github.com/gin-gonic/gin"
 )
 
