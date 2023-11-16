@@ -19,12 +19,12 @@ func CreateCustomer(c *gin.Context) {
 
 	// สร้าง Customer
 	newCustomer := entity.Customer{
-		FirstName:      customer.FirstName,
-		LastName:       customer.LastName,
+		FullName:      customer.FullName,
+
 		UserName:       customer.UserName,
 		Password:       customer.Password,
 		Email:          customer.Email,
-		Phone:          customer.Phone,
+
 		HashedPassword: customer.HashedPassword,
 	}
 

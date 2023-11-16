@@ -1,11 +1,11 @@
 export interface CustomerInterface {    
 
     UserName?: string;
-    FirstName?: string;
-    LastName?: string;
+    FullName?: string;
+
     Email?: string;
 
-    Phone?: string;
+
     Password?: string;
     HashedPassword?: string;
 

@@ -5,7 +5,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { GetCustomerByHash } from "../../services/http/customer/customer";
 import { CustomerInterface } from "../../interfaces/Icustomer";
 import styles from './Login.module.css'
-import BG from '../../assets/etc/BG.jpg';
+import BG from '../../assets/etc/BG.png';
 import { useCustomer } from '../../context/context'; 
 
 const arrayBufferToHex = (arrayBuffer : any) => {
@@ -55,7 +55,7 @@ const Login = () => {
     setLoading(false);
     console.log('Received values of form: ', values);
   };
-
+  
   return (
     <div className={styles.loginContainer}>
        <style>

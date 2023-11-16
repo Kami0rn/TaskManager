@@ -28,7 +28,7 @@ function Nav() {
                 </Link>
             </div >
             <div id={styles.profile}>
-                <a href='#' >{customer ? customer.FirstName : 'Guest'}</a>
+                <a href='#' >{customer ? customer.FullName : 'Guest'}</a>
                 <img src="/NavImage/Vector.png" />
             </div>
         </div>

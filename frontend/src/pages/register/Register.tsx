@@ -4,7 +4,7 @@ import { Layout, Space,App as sss, Button,Form , message,  Input, } from 'antd';
 // import { useNavigate } from "react-router-dom";
 import { CreateCustomer } from "../../services/http/customer/customer";
 import { CustomerInterface } from "../../interfaces/Icustomer";
-import BG from '../../assets/etc/BG.jpg';
+import BG from '../../assets/etc/BG.png';
 import raw from '../../assets/etc/raw.jpg';
 import { useNavigate } from 'react-router-dom';
  
@@ -106,40 +106,36 @@ const Register: React.FC = () => {
                 
               {/* ส่วนนี้เป็นกล่องinput ชื่อname=ต้องตรงกับinterfacesที่เราต้องการใส่เข้าไป */}
               <div className="registerBox">
-                <img src={raw} alt="" />
+                <div className="Box">
+                  <img src={raw} alt="" />
+                </div>
                 <div className="leftRegist">
-                <h2 className="reLabel">Register</h2>
+                <h1 id = "Comname">Syncify</h1>
+                <h4 id="Signup">Sign up</h4>
               
 
-                    <Form.Item label="UserName" name="UserName"rules={[{required: true,message: "กรุณากรอก UserName!",},]}>
+                    <Form.Item label="" name="UserName"rules={[{required: true,message: "กรุณากรอก UserName!",},]}>
                         <Input placeholder='UserName'></Input>
                     </Form.Item>
-                    <Form.Item label="FirstName"name="FirstName"rules={[{required: true,message: "กรุณากรอกชื่อ !",},]}>
-                        <Input placeholder='FristName'></Input>
+                    <Form.Item label=""name="FullName"rules={[{required: true,message: "กรุณากรอกชื่อ !",},]}>
+                        <Input placeholder='FullName'></Input>
                     </Form.Item>
-                    <Form.Item label="LastName" name="LastName"rules={[{required: true,message: "กรุณากรอก LastName!",},]}>
-                        <Input placeholder='LastName'></Input>
-                    </Form.Item>
-                    <Form.Item label="phone" name="Phone"rules={[{required: true,message: "กรุณากรอก phone!",},]}>
-                        <Input placeholder='phone'></Input>
-                    </Form.Item>
-                </div>
-                <div className="rightRegist">
-                    <Form.Item label="password" name="Password"rules={[{required: true,message: "กรุณากรอก password!",},]}>
-                        <Input.Password placeholder='password'></Input.Password>
-                    </Form.Item>
-                    {/* <Form.Item label="address" name="Address"rules={[{required: true,message: "กรุณากรอก address!",},]}>
-                        <Input placeholder='address'></Input>
-                    </Form.Item> */}
-                    <Form.Item label="email" name="Email"rules={[{type: "email",message: "รูปแบบอีเมลไม่ถูกต้อง !",},{required: true,message: "กรุณากรอก email!",},]}>
+                    <Form.Item label="" name="Email"rules={[{type: "email",message: "รูปแบบอีเมลไม่ถูกต้อง !",},{required: true,message: "กรุณากรอก email!",},]}>
                         <Input placeholder='email'></Input>
                     </Form.Item>
-
-                    {/* อันนี้ปุ่มเฉยๆไม่มีไร */}
-                    <Form.Item>
-                        <Button className="subBTN" style={{backgroundColor: 'brown'}} block type='primary' htmlType='submit'>Submit</Button>
+                    <Form.Item label="" name="Password"rules={[{required: true,message: "กรุณากรอก password!",},]}>
+                        <Input.Password placeholder='password'></Input.Password>
                     </Form.Item>
+                    <Form.Item>
+                        <Button className="subBTN" style={{backgroundColor: '#f9b17a'}} block type='primary' htmlType='submit'>Sign Up</Button>
+                    </Form.Item>
+                    <div id="donthave">
+                      <div>Already have an account?</div>
+                      <div>Log in</div>
+                    </div>
                 </div>
+                
+                
               </div>
             </Form>
           </div>

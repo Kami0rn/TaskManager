@@ -8,15 +8,14 @@ type Customer struct {
 
 	UserName string `gorm:"uniqueIndex"`
 
-	FirstName string 
+	FullName string 
 
-	LastName string 
 
 	Email string `gorm:"uniqueIndex;"`
 
 	// Address string 
 
-	Phone string 
+
 
 	Password string 
 
