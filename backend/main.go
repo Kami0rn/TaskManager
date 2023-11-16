@@ -8,7 +8,7 @@ import (
 	"github.com/Kami0rn/TaskManager/entity"
 )
 
-const PORT = "8080"
+const PORT = "8084"
 
 
 func main() {
