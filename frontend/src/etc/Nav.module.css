@@ -29,7 +29,7 @@ nav a{
     border-left: 100px;
     display: flex;
     margin-right: 20px;
-    background-color: #fff8f0c0;
+    background-color: #ffffff;
     color: #9E2B25;
     padding: 10px;
     border-radius: 12px;
@@ -67,7 +67,7 @@ nav a{
     margin-right: 30px;
 }
 #wallet *{
-    color: #9E2B25;
+    color: #2D3250;
 
 }
 #wallet img{

@@ -130,7 +130,7 @@ const Register: React.FC = () => {
                         <Button className="subBTN" style={{backgroundColor: '#f9b17a'}} block type='primary' htmlType='submit'>Sign Up</Button>
                     </Form.Item>
                     <div id="donthave">
-                      <div>Already have an account?</div>
+                      <div><h4>Already have an account?</h4></div>
                       <div>Log in</div>
                     </div>
                 </div>
