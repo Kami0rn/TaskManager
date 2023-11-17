@@ -36,7 +36,7 @@ const headerStyle: React.CSSProperties = {
   paddingInline: 40,
   lineHeight: '25px',
   display: "flex",
-  backgroundColor: 'brown',
+  backgroundColor: 'white',
 };
 //ตกเเต่งส่วนตัว
 const contentStyle: React.CSSProperties = {
