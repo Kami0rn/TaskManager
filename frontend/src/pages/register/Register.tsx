@@ -131,7 +131,10 @@ const Register: React.FC = () => {
                     </Form.Item>
                     <div id="donthave">
                       <div><h4>Already have an account?</h4></div>
-                      <div>Log in</div>
+                      {/* <Link to='/register' className={styles.Link}>
+
+                        <h4 className={styles.regisText}>register now!!</h4>
+                      </Link> */}
                     </div>
                 </div>
                 
