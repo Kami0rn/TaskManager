@@ -1,25 +1,25 @@
 import React, { createContext, useContext, useState } from 'react';
-import { CustomerInterface } from '../interfaces/Icustomer';
+import { UserInterface } from '../interfaces/Iuser';
 
-const reactContext = createContext({ customer: null as CustomerInterface | null, login: (customerData: CustomerInterface | null) => {}, logout: () => {} });
+const reactContext = createContext({ user: null as UserInterface | null, login: (userData: UserInterface | null) => {}, logout: () => {} });
 
-export const useCustomer = () => {
+export const useUser = () => {
   return useContext(reactContext);
 };
 
-export const CustomerProvider = ({ children }: { children: React.ReactNode }) => {
-  const [customer, setCustomer] = useState<CustomerInterface | null>(null);
+export const UserProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState<UserInterface | null>(null);
 
-  const login = (customerData: CustomerInterface | null) => {
-    setCustomer(customerData);
+  const login = (userData: UserInterface | null) => {
+    setUser(userData);
   };
 
   const logout = () => {
-    setCustomer(null);
+    setUser(null);
   };
 
   return (
-    <reactContext.Provider value={{ customer, login, logout }}>
+    <reactContext.Provider value={{ user, login, logout }}>
       {children}
     </reactContext.Provider>
   );

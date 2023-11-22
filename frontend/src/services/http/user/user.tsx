@@ -1,10 +1,10 @@
-import { CustomerInterface } from "../../../interfaces/Icustomer";
+import { UserInterface } from "../../../interfaces/Iuser";
 
 
 const apiUrl = "http://localhost:8084";
 
 
-async function GetCustomers() {
+async function GetUsers() {
   const requestOptions = {
     method: "GET",
     headers: {
@@ -12,7 +12,7 @@ async function GetCustomers() {
     },
   };
 
-  let res = await fetch(`${apiUrl}/customers`, requestOptions)
+  let res = await fetch(`${apiUrl}/users`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -27,12 +27,12 @@ async function GetCustomers() {
 
 
 
-async function DeleteCustomerByID(id: Number | undefined) {
+async function DeleteUserByID(id: Number | undefined) {
   const requestOptions = {
     method: "DELETE"
   };
 
-  let res = await fetch(`${apiUrl}/customers/${id}`, requestOptions)
+  let res = await fetch(`${apiUrl}/users/${id}`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -46,12 +46,12 @@ async function DeleteCustomerByID(id: Number | undefined) {
 }
 
 
-async function GetCustomerById(id: Number | undefined) {
+async function GetUserById(id: Number | undefined) {
   const requestOptions = {
     method: "GET"
   };
 
-  let res = await fetch(`${apiUrl}/customer/${id}`, requestOptions)
+  let res = await fetch(`${apiUrl}/user/${id}`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -65,12 +65,12 @@ async function GetCustomerById(id: Number | undefined) {
 }
 
 
-async function GetCustomerByHash(hashed_password: string | undefined) {
+async function GetUserByHash(hashed_password: string | undefined) {
   const requestOptions = {
     method: "GET"
   };
 
-  let res = await fetch(`${apiUrl}/customer/hash/${hashed_password}`, requestOptions)
+  let res = await fetch(`${apiUrl}/user/hash/${hashed_password}`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -83,14 +83,14 @@ async function GetCustomerByHash(hashed_password: string | undefined) {
   return res;
 }
 
-async function CreateCustomer(data: CustomerInterface) {
+async function CreateUser(data: UserInterface) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   };
 
-  let res = await fetch(`${apiUrl}/customers`, requestOptions)
+  let res = await fetch(`${apiUrl}/users`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -103,14 +103,14 @@ async function CreateCustomer(data: CustomerInterface) {
   return res;
 }
 
-async function UpdateCustomer(data: CustomerInterface) {
+async function UpdateUser(data: UserInterface) {
   const requestOptions = {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   };
 
-  let res = await fetch(`${apiUrl}/customers`, requestOptions)
+  let res = await fetch(`${apiUrl}/users`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -129,12 +129,12 @@ async function UpdateCustomer(data: CustomerInterface) {
 
 export {
 
-    GetCustomers,
-    CreateCustomer,
-    DeleteCustomerByID,
-    GetCustomerById,
-    UpdateCustomer,
-    GetCustomerByHash
+    GetUsers,
+    CreateUser,
+    DeleteUserByID,
+    GetUserById,
+    UpdateUser,
+    GetUserByHash
   };
 
 

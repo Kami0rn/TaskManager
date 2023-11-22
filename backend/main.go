@@ -21,19 +21,19 @@ func main() {
 
 	r.Use(CORSMiddleware())
 
-	// Customer Routes
+	// UserRoutes
 
-	r.GET("/customers", controller.ListCustomers)
+	r.GET("/users", controller.ListUsers)
 
-	r.GET("/customer/:id", controller.GetCustomer)
+	r.GET("/user/:id", controller.GetUser)
 
-	r.GET("/customer/hash/:hashed_password", controller.GetCustomerByHash)
+	r.GET("/user/hash/:hashed_password", controller.GetUserByHash)
 
-	r.POST("/customers", controller.CreateCustomer)
+	r.POST("/users", controller.CreateUser)
 
-	r.PATCH("/customers", controller.UpdateCustomer)
+	r.PATCH("/users", controller.UpdateUser)
 
-	r.DELETE("/customers/:id", controller.DeleteCustomer)
+	r.DELETE("/users/:id", controller.DeleteUser)
 
 
 

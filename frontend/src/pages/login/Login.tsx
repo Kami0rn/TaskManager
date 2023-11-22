@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate , Link } from 'react-router-dom'; // Use useNavigate instead of useHistory
 import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { GetCustomerByHash } from "../../services/http/customer/customer";
-import { CustomerInterface } from "../../interfaces/Icustomer";
+import { GetUserByHash } from "../../services/http/user/user";
+import { UserInterface } from "../../interfaces/Iuser";
 import styles from './Login.module.css'
 import BG from '../../assets/etc/BG.png';
-import { useCustomer } from '../../context/context'; 
+import { useUser } from '../../context/context'; 
 
 const arrayBufferToHex = (arrayBuffer : any) => {
   const view = new DataView(arrayBuffer); // Corrected line
@@ -28,19 +28,19 @@ const sha256 = async (message : any) => {
 const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { login } = useCustomer(); 
-  const handleLogin = async (value: CustomerInterface) => {
+  const { login } = useUser(); 
+  const handleLogin = async (value: UserInterface) => {
     const concatenatedString = `${value.UserName}${value.Password}`;
     const hashedPassword = await sha256(concatenatedString);
     
     console.log(value)
     try {
-      const customer = await GetCustomerByHash(hashedPassword);
+      const user = await GetUserByHash(hashedPassword);
   
-      if (customer) {
-        login(customer);
+      if (user) {
+        login(user);
         message.success('Login successful');
-        console.log(customer)
+        console.log(user)
         navigate('/home');
       } else {
         message.error('Invalid username or password');
@@ -49,7 +49,7 @@ const Login = () => {
       console.error(error);
     }
   };
-  const onFinish = async (values: CustomerInterface) => {
+  const onFinish = async (values: UserInterface) => {
     setLoading(true);
     handleLogin(values);
     setLoading(false);

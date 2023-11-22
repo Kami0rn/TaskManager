@@ -8,60 +8,60 @@ import (
 )
 
 // POST /users
-func CreateCustomer(c *gin.Context) {
-	var customer entity.Customer
+func CreateUser(c *gin.Context) {
+	var user entity.User
 
 	// bind เข้าตัวแปร user
-	if err := c.ShouldBindJSON(&customer); err != nil {
+	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	// สร้าง Customer
-	newCustomer := entity.Customer{
-		FullName:      customer.FullName,
+	// สร้าง User
+	newUser := entity.User{
+		FullName:      user.FullName,
 
-		UserName:       customer.UserName,
-		Password:       customer.Password,
-		Email:          customer.Email,
+		UserName:       user.UserName,
+		Password:       user.Password,
+		Email:          user.Email,
 
-		HashedPassword: customer.HashedPassword,
+		HashedPassword: user.HashedPassword,
 	}
 
 	// บันทึก
-	if err := entity.DB().Create(&newCustomer).Error; err != nil {
+	if err := entity.DB().Create(&newUser).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": newCustomer})
+	c.JSON(http.StatusOK, gin.H{"data": newUser})
 }
 
 // GET /user/:id
-func GetCustomer(c *gin.Context) {
-	var customer entity.Customer
+func GetUser(c *gin.Context) {
+	var user entity.User
 	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM customers WHERE id = ?", id).Find(&customer).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM users WHERE id = ?", id).Find(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": customer})
+	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
 // GET /users
-func ListCustomers(c *gin.Context) {
-	var customers []entity.Customer
-	if err := entity.DB().Raw("SELECT * FROM customers").Find(&customers).Error; err != nil {
+func ListUsers(c *gin.Context) {
+	var users []entity.User
+	if err := entity.DB().Raw("SELECT * FROM users").Find(&users).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": customers})
+	c.JSON(http.StatusOK, gin.H{"data": users})
 }
 
 // DELETE /users/:id
-func DeleteCustomer(c *gin.Context) {
+func DeleteUser(c *gin.Context) {
 	id := c.Param("id")
-	if tx := entity.DB().Exec("DELETE FROM customers WHERE id = ?", id); tx.RowsAffected == 0 {
+	if tx := entity.DB().Exec("DELETE FROM users WHERE id = ?", id); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
 		return
 	}
@@ -69,36 +69,36 @@ func DeleteCustomer(c *gin.Context) {
 }
 
 // PATCH /users
-func UpdateCustomer(c *gin.Context) {
-	var customer entity.Customer
-	var result entity.Customer
+func UpdateUser(c *gin.Context) {
+	var user entity.User
+	var result entity.User
 
-	if err := c.ShouldBindJSON(&customer); err != nil {
+	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	// ค้นหา user ด้วย id
-	if tx := entity.DB().Where("id = ?", customer.ID).First(&result); tx.RowsAffected == 0 {
+	if tx := entity.DB().Where("id = ?", user.ID).First(&result); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
 		return
 	}
 
-	if err := entity.DB().Save(&customer).Error; err != nil {
+	if err := entity.DB().Save(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": customer})
+	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
-func GetCustomerByHash(c *gin.Context) {
-    var customer entity.Customer
+func GetUserByHash(c *gin.Context) {
+    var user entity.User
     hashedPassword := c.Param("hashed_password")
 
-    // Replace this with a proper database query to retrieve the customer by hashed password
-    if err := entity.DB().Where("hashed_password = ?", hashedPassword).First(&customer).Error; err != nil {
+    // Replace this with a proper database query to retrieve the user by hashed password
+    if err := entity.DB().Where("hashed_password = ?", hashedPassword).First(&user).Error; err != nil {
         c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid username or password"});
         return;
     }
 
-    c.JSON(http.StatusOK, gin.H{"data": customer});
+    c.JSON(http.StatusOK, gin.H{"data": user});
 }

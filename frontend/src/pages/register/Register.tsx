@@ -2,8 +2,8 @@ import React from "react";
 import "./Register.css";
 import { Layout, Space,App as sss, Button,Form , message,  Input, } from 'antd';
 // import { useNavigate } from "react-router-dom";
-import { CreateCustomer } from "../../services/http/customer/customer";
-import { CustomerInterface } from "../../interfaces/Icustomer";
+import { CreateUser } from "../../services/http/user/user";
+import { UserInterface } from "../../interfaces/Iuser";
 import BG from '../../assets/etc/BG.png';
 import raw from '../../assets/etc/raw.jpg';
 import { useNavigate } from 'react-router-dom';
@@ -56,12 +56,12 @@ const Register: React.FC = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const onFinish = async (values: CustomerInterface) => {
+  const onFinish = async (values: UserInterface) => {
     const concatenatedString = `${values.UserName}${values.Password}`;
     const hashedPassword = await sha256(concatenatedString);
     values.HashedPassword = hashedPassword;
 
-    let res = await CreateCustomer(values);
+    let res = await CreateUser(values);
 
     if (res.status) {
       messageApi.open({

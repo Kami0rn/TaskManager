@@ -2,15 +2,15 @@ import React from 'react'
 import styles from './Nav.module.css'
 import { Link ,NavLink } from "react-router-dom";
 import { useState } from 'react'
-import { useCustomer } from '../context/context';
+import { useUser } from '../context/context';
 
 
 
 function Nav() {
-  const { customer } = useCustomer(); // Access the customer context using the useCustomer hook
+  const { user } = useUser(); // Access the user context using the useUser hook
 
   const handleBurgerClick = () => {
-    console.log('Customer Context:', customer);
+    console.log('User Context:', user);
   };
   return (
     <nav id={styles.navbar}>
@@ -28,7 +28,7 @@ function Nav() {
                 </Link>
             </div >
             <div id={styles.profile}>
-                <a href='#' >{customer ? customer.FullName : 'Guest'}</a>
+                <a href='#' >{user ? user.FullName : 'Guest'}</a>
                 <img src="/NavImage/Vector.png" />
             </div>
         </div>

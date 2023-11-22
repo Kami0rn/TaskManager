@@ -33,7 +33,7 @@ func SetupDatabase() {
 	// Migrate the schema
 
 	database.AutoMigrate(
-		&Customer{},
+		&User{},
 		
 		
 	 )

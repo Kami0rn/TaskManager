@@ -2,7 +2,7 @@ package entity
 
 import "gorm.io/gorm"
 
-type Customer struct {
+type User struct {
 	
 	gorm.Model
 
