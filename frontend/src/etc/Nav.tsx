@@ -3,11 +3,12 @@ import styles from './Nav.module.css'
 import { Link ,NavLink } from "react-router-dom";
 import { useState } from 'react'
 import { useUser } from '../context/context';
+import raw from '../etc/raw.jpg';
 
 
 
 function Nav() {
-  const { user } = useUser(); // Access the user context using the useUser hook
+  const { user } = useUser(); // Access the customer context using the useCustomer hook
 
   const handleBurgerClick = () => {
     console.log('User Context:', user);
@@ -15,8 +16,8 @@ function Nav() {
   return (
     <nav id={styles.navbar}>
         <div >
-          <Link to='/' id={styles.burger} onClick={handleBurgerClick}>
-            <img  src="/NavImage/burger.png" alt="" />
+          <Link to='/router' id={styles.burger} onClick={handleBurgerClick}>
+            <img  src={raw} alt="" />
           </Link>
         </div>
       

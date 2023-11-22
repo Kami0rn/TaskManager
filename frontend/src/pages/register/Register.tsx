@@ -7,6 +7,8 @@ import { UserInterface } from "../../interfaces/Iuser";
 import BG from '../../assets/etc/BG.png';
 import raw from '../../assets/etc/raw.jpg';
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom" ;
+
  
 
 const arrayBufferToHex = (arrayBuffer : any) => {
@@ -135,6 +137,9 @@ const Register: React.FC = () => {
 
                         <h4 className={styles.regisText}>register now!!</h4>
                       </Link> */}
+                      <Link id="login" to='/login' className="Link">
+                        <h4>Login</h4>
+                      </Link>
                     </div>
                 </div>
                 

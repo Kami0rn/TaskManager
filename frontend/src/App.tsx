@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nav from '../src/etc/Nav';
 
 import Register from './pages/register/Register';
-
+import Router from './pages/router/Router'
 import Login from './pages/login/Login';
 
 
@@ -17,7 +17,7 @@ function App() {
 
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-
+          <Route path='/router' element={<Router />} />
           
         </Routes>
 

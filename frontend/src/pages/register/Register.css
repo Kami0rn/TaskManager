@@ -67,6 +67,7 @@ input{
 .subBTN{
   width: 20%;
   max-width: 100px;
+  color: #2D3250;
 }
 #Comname {
   margin: 7%;
@@ -92,4 +93,13 @@ input{
 
 .Box {
   width: 50%;
+}
+
+
+#login{
+  color: #F9B17A;
+}
+
+#donthave {
+  color: #676F9D;
 }
