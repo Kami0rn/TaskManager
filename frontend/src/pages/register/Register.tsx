@@ -36,7 +36,7 @@ const headerStyle: React.CSSProperties = {
   paddingInline: 40,
   lineHeight: '25px',
   display: "flex",
-  backgroundColor: 'brown',
+  backgroundColor: 'white',
 };
 //ตกเเต่งส่วนตัว
 const contentStyle: React.CSSProperties = {
@@ -130,8 +130,11 @@ const Register: React.FC = () => {
                         <Button className="subBTN" style={{backgroundColor: '#f9b17a'}} block type='primary' htmlType='submit'>Sign Up</Button>
                     </Form.Item>
                     <div id="donthave">
-                      <div>Already have an account?</div>
-                      <div>Log in</div>
+                      <div><h4>Already have an account?</h4></div>
+                      {/* <Link to='/register' className={styles.Link}>
+
+                        <h4 className={styles.regisText}>register now!!</h4>
+                      </Link> */}
                     </div>
                 </div>
                 
