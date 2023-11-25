@@ -1,19 +1,24 @@
 package entity
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type List struct {
 
 	gorm.Model
-
-	ListName string `gorm:"uniqueIndex"`
-
+	ListName 		string `gorm:"uniqueIndex"`
 	ListDescription string
+	Process 		float32
+	ListCrateDate	time.Time
+	//FK
+	ProjectID 		*uint
+	Project   		Project
 
-	ProjectID *uint
-	Project   Project
-
-	Card []Card `gorm:"foreignKey:ListID"`
+	//give FK
+	Cards 			[]Card `gorm:"foreignKey:ListID"`
 
 }
 

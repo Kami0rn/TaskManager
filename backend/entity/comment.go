@@ -1,15 +1,19 @@
 package entity
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type Comment struct {	
 	gorm.Model
 	CommentText	 	string 
+	EditDatetime	time.Time
 
-	//FK not 100%
 	UserID			*uint
-	//User	User 	`gorm:"foreignKey:UserID"`
+	User	User 	`gorm:"foreignKey:UserID"`
 
-	CardID 	*uint 
+	CardID 			*uint 
 	Card	Card 	`gorm:"foreignKey:CardID"`
 }

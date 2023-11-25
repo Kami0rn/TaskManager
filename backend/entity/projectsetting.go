@@ -4,13 +4,14 @@ import "gorm.io/gorm"
 
 type ProjectSetting struct {	
 	gorm.Model
-	//FK not 100%
+	//fk
 	BackgroundID			*uint
 	Background	Background 	`gorm:"foreignKey:BackgroundID"`
 	
 	FontID					*uint
-	Font		Font 		`gorm:"foreignKey:BackgroundID"`
-
-	// อย่าลืมแก้ไข Project เพิ่ม 
+	Font		Font 		`gorm:"foreignKey:FontID"`
+	//give fk
+	Projects  []Project		`gorm:"foreignKey:ProjectSettingID"`
+ 	
 
 }

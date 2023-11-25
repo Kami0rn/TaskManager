@@ -5,6 +5,7 @@ import "gorm.io/gorm"
 type Font struct {	
 	gorm.Model
 	ColorCode	 		string 
+	
 	//ให้ FK
-	ProjectSetting		[]ProjectSetting	`gorm:"foreignKey:FontID"`
+	ProjectSettings		[]ProjectSetting	`gorm:"foreignKey:FontID"`
 }

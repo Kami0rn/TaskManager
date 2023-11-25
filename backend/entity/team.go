@@ -1,17 +1,23 @@
 package entity
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type Team struct {
-
 	gorm.Model
+	TeamName 		string 		`gorm:"uniqueIndex"`
+	TeamCreateDate	time.Time
 
-	TeamName string `gorm:"uniqueIndex"`
+	UserID 			*uint
+	User   			User 	 	`gorm:"foreignKey:UserID"`
+	
+	TeamStatusID 	*uint
+	TeamStatus  	TeamStatus 	`gorm:"foreignKey:TeamStatusID"`
 
-	UserID *uint
-	User   User
-
-	Workspace []Workspace `gorm:"foreignKey:TeamID"`
+	Workspaces []Workspace 		`gorm:"foreignKey:TeamID"`
 }
 
 	

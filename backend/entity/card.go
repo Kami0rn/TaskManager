@@ -1,16 +1,26 @@
 package entity
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type Card struct {	
 	gorm.Model
 	CardName	 		string 
 	CardDescription	 	string 
+	CreateCard			time.Time
 
-	//FK not 100%
-	ListID	*uint
-	//List	List `gorm:"foreignKey:ListID"`
+	//FK 
+	ListID			*uint
+	List			List 		`gorm:"foreignKey:ListID"`
+
+	CardStatusID	*uint 
+	CardStatus 		CardStatus 	`gorm:"foreignKey:CardStatusID"`
+
+	//give FK
+	Comments		[]Comment	`gorm:"foreignKey:CardID"`
+	Deadlines		[]Deadline	`gorm:"foreignKey:CardID"`
 	
-	//ให้ FK
-	Comment		[]Comment	`gorm:"foreignKey:CardID"`
 }

@@ -6,5 +6,5 @@ type Background struct {
 	gorm.Model
 	ColorCode	 		string 
 	//ให้ FK
-	ProjectSetting		[]ProjectSetting	`gorm:"foreignKey:BackgroundID"`
+	ProjectSettings		[]ProjectSetting	`gorm:"foreignKey:BackgroundID"`
 }

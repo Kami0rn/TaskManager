@@ -22,7 +22,7 @@ func DB() *gorm.DB {
 
 func SetupDatabase() {
 
-	database, err := gorm.Open(sqlite.Open("TaskManager"), &gorm.Config{})
+	database, err := gorm.Open(sqlite.Open("TaskManager.db"), &gorm.Config{})
 
 	if err != nil {
 
@@ -33,7 +33,38 @@ func SetupDatabase() {
 	// Migrate the schema
 
 	database.AutoMigrate(
+		&Background{},
+		&CardStatus{},
+		&Font{},
+		&Tier{},
+		&PaymentStatus{},
+		&PaymentType{},
+		&TeamStatus{},
+		&WorkspaceStatus{},	
+		//----
 		&User{},
+		&Payment{},
+		&Team{},
+		&Workspace{},
+		&ProjectSetting{},
+		&Project{},
+		&ProjectHistory{},
+		&List{},
+		&Calendar{},
+		&Card{},
+		&Comment{},
+		&Deadline{},
+
+
+		
+
+		
+		
+
+		
+		
+		
+
 		
 		
 	 )
