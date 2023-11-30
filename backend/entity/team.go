@@ -11,13 +11,12 @@ type Team struct {
 	TeamName 		string 		`gorm:"uniqueIndex"`
 	TeamCreateDate	time.Time
 
-	UserID 			*uint
-	User   			User 	 	`gorm:"foreignKey:UserID"`
-	
 	TeamStatusID 	*uint
 	TeamStatus  	TeamStatus 	`gorm:"foreignKey:TeamStatusID"`
 
-	Workspaces []Workspace 		`gorm:"foreignKey:TeamID"`
+	Workspaces 	[]Workspace 	`gorm:"foreignKey:TeamID"`
+	Teammates 	[]Teammate 		`gorm:"foreignKey:TeammateID"`
+
 }
 
 	

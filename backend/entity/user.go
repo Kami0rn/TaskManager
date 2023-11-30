@@ -15,9 +15,14 @@ type User struct {
 	//fk
 	TierID 	*uint
 	Tier  	Tier 					 `gorm:"foreignKey:TierID"`
+	
+	UserStatusID 	*uint
+	UserStatus  	UserStatus 					 `gorm:"foreignKey:TierID"`
 	//give fk
 	Payments 		[]Payment 		 `gorm:"foreignKey:UserID"`
 	Teams 			[]Team 			 `gorm:"foreignKey:UserID"`
 	ProjectHistorys []ProjectHistory `gorm:"foreignKey:UserID"`
 	Comments 		[]Comment 		 `gorm:"foreignKey:UserID"`
+	Teammates 		[]Teammate 		 `gorm:"foreignKey:UserID"`
+
 } 

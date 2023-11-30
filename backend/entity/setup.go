@@ -31,7 +31,6 @@ func SetupDatabase() {
 	}
 
 	// Migrate the schema
-
 	database.AutoMigrate(
 		&Background{},
 		&CardStatus{},

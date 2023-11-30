@@ -15,7 +15,9 @@ type Project struct {
 	WorkspaceID 		*uint
 	Workspace   		Workspace 		`gorm:"foreignKey:WorkspaceID"`
 	ProjectSettingID	*uint
-	ProjectSetting		 ProjectSetting	`gorm:"foreignKey:WorkspaceID"`
+	ProjectSetting		 ProjectSetting	`gorm:"foreignKey:ProjectSettingID"`
+	ProjectStatusID		*uint
+	ProjectStatus		 ProjectStatus	`gorm:"foreignKey:ProjectStatusID"`
 	//give fk
 	
 	Calendars		[]Calendar 		 `gorm:"foreignKey:ProjectID"`
