@@ -15,7 +15,7 @@ type List struct {
 	ListCrateDate	time.Time
 	//FK
 	ProjectID 		*uint
-	Project   		Project
+	Project   		Project	`gorm:"foreignKey:ProjectID"`
 
 	//give FK
 	Cards 			[]Card `gorm:"foreignKey:ListID"`

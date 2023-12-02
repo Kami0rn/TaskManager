@@ -35,11 +35,15 @@ func SetupDatabase() {
 		&Background{},
 		&CardStatus{},
 		&Font{},
-		&Tier{},
 		&PaymentStatus{},
 		&PaymentType{},
+		&ProjectStatus{},
 		&TeamStatus{},
+		&Tier{},
 		&WorkspaceStatus{},	
+		
+		&Role{},
+		&UserStatus{},
 		//----
 		&User{},
 		&Payment{},
@@ -53,6 +57,7 @@ func SetupDatabase() {
 		&Card{},
 		&Comment{},
 		&Deadline{},
+		&Teammate{},
 
 
 		
