@@ -20,6 +20,7 @@ func DB() *gorm.DB {
 }
 
 
+
 func SetupDatabase() {
 
 	database, err := gorm.Open(sqlite.Open("TaskManager.db"), &gorm.Config{})

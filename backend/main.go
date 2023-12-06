@@ -14,11 +14,7 @@ const PORT = "8084"
 func main() {
 
 	entity.SetupDatabase()
-
 	r := gin.Default()
-
-
-
 	r.Use(CORSMiddleware())
 
 	// UserRoutes
