@@ -1,4 +1,4 @@
-package main
+ package main
 
 import (
 	"github.com/gin-gonic/gin"
@@ -25,7 +25,7 @@ func main() {
 
 	r.GET("/user/hash/:hashed_password", controller.GetUserByHash)
 
-	r.POST("/users", controller.CreateUser)
+	r.POST("/register", controller.CreateUser)
 
 	r.PATCH("/users", controller.UpdateUser)
 

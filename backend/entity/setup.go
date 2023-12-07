@@ -11,6 +11,7 @@ import (
 
 
 var db *gorm.DB
+var err error
 
 
 func DB() *gorm.DB {

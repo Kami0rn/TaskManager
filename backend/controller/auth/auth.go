@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"github.com/Kami0rn/TaskManager/orm"
+	"github.com/Kami0rn/TaskManager/entity"
 	"fmt"
 	"os"
 	"time"

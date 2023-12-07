@@ -6,7 +6,7 @@ type User struct {
 	gorm.Model
 	UserName 		string `gorm:"uniqueIndex"`
 	Password 		string 
-	HashedPassword 	string
+	// HashedPassword 	string
 	FullName 		string 
 	Email 			string `gorm:"uniqueIndex;"`
 	PhoneNumber 	int 
