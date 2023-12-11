@@ -22,7 +22,7 @@ type RegisterBody struct {
 	Password    string `json:"Password" binding:"required"`
 	Fullname    string `json:"FullName" binding:"required"`
 	Email       string `json:"Email" binding:"required"`
-	PhoneNumber int    `json:"PhoneNumber" binding:"required"`
+	PhoneNumber int    `json:"PhoneNumber"`
 	Bio         string `json:"Bio"`
 	ProfilePic  string `json:"ProfilePic"`
 	TierID      *uint
