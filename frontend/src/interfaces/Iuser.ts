@@ -1,13 +1,12 @@
 export interface UserInterface {    
 
     UserName?: string;
+    Password?: string
     FullName?: string;
-
     Email?: string;
-
-
-    Password?: string;
-    HashedPassword?: string;
+    PhoneNumber?: string | number;
+    Bio?: string;
+    ProfilePic?: string;
 
 
 }

@@ -6,6 +6,7 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	golang.org/x/crypto v0.15.0
+	golang.org/x/text v0.14.0
 	gorm.io/driver/sqlite v1.5.2
 	gorm.io/gorm v1.25.5
 )
@@ -35,7 +36,6 @@ require (
 	golang.org/x/arch v0.6.0 // indirect
 	golang.org/x/net v0.18.0 // indirect
 	golang.org/x/sys v0.14.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

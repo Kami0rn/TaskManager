@@ -18,17 +18,15 @@ var hmacSampleSecret []byte
 
 // Binding from JSON
 type RegisterBody struct {
-	Username    string `json:"username" binding:"required"`
-	Password    string `json:"password" binding:"required"`
-	Fullname    string `json:"fullname" binding:"required"`
-	Email       string `json:"email" binding:"required"`
-	PhoneNumber int `json:"phonenumber" binding:"required"`
-	Bio string
-	ProfilePic string
-	TierID *uint
-
+	Username    string `json:"UserName" binding:"required"`
+	Password    string `json:"Password" binding:"required"`
+	Fullname    string `json:"FullName" binding:"required"`
+	Email       string `json:"Email" binding:"required"`
+	PhoneNumber int    `json:"PhoneNumber" binding:"required"`
+	Bio         string `json:"Bio"`
+	ProfilePic  string `json:"ProfilePic"`
+	TierID      *uint
 }
-
 
 func Register(c *gin.Context) {
 	var json RegisterBody
@@ -47,22 +45,22 @@ func Register(c *gin.Context) {
 
 	var tierID uint
 	if json.TierID == nil {
-		tierID = 1 // Assign default value 1 if TierID is not provided
+		tierID = 1            // Assign default value 1 if TierID is not provided
 		json.TierID = &tierID // Assign the address of tierID to the TierID pointer
 	}
 	//create user
 	encryptedPassword, _ := bcrypt.GenerateFromPassword([]byte(json.Password), 10)
 	user := entity.User{
-		UserName: json.Username, 
-		Password: string(encryptedPassword), 
-		FullName: json.Fullname, 
-		Email: json.Email ,
-		PhoneNumber: json.PhoneNumber ,
-		Bio: json.Bio,
-		ProfilePic: json.ProfilePic,
-		TierID:      json.TierID , // Set the TierID here
+		UserName:    json.Username,
+		Password:    string(encryptedPassword),
+		FullName:    json.Fullname,
+		Email:       json.Email,
+		PhoneNumber: json.PhoneNumber,
+		Bio:         json.Bio,
+		ProfilePic:  json.ProfilePic,
+		TierID:      json.TierID, // Set the TierID here
 	}
-	db.Create(&user) 
+	db.Create(&user)
 	if user.ID > 0 {
 		c.JSON(http.StatusOK, gin.H{
 			"status":  "ok",

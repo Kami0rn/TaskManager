@@ -1,6 +1,9 @@
 package entity
 
-import "gorm.io/gorm"
+import (
+	// "golang.org/x/text/internal/number"
+	"gorm.io/gorm"
+)
 
 type User struct {
 	gorm.Model

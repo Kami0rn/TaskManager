@@ -12,15 +12,15 @@ import (
 	// "fmt"
 )
 
-type RegisterBody struct {
-	Username    string `json:"username" binding:"required"`
-	Password    string `json:"password" binding:"required"`
-	Fullname    string `json:"fullname" binding:"required"`
-	Email       string `json:"email" binding:"required"`
-	PhoneNumber int    `json:"phonenumber" binding:"required"`
-	Bio         string `json:"bio"`
-	ProfilePic  string `json:"profilePic"`
-}
+// type RegisterBody struct {
+// 	Username    string `json:"username" binding:"required"`
+// 	Password    string `json:"password" binding:"required"`
+// 	Fullname    string `json:"fullname" binding:"required"`
+// 	Email       string `json:"email" binding:"required"`
+// 	PhoneNumber int    `json:"phonenumber" binding:"required"`
+// 	Bio         string `json:"bio"`
+// 	ProfilePic  string `json:"profilePic"`
+// }
 
 // POST /users
 // POST /users
