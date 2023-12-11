@@ -3,12 +3,16 @@
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/Kami0rn/TaskManager/controller"
+	// "github.com/Kami0rn/TaskManager/controller"
 
 	"github.com/Kami0rn/TaskManager/entity"
+
+	Authcontroller "github.com/Kami0rn/TaskManager/controller/auth"
+
+	// Usercontroller "github.com/Kami0rn/TaskManager/controller"
 )
 
-const PORT = "8084"
+const PORT = "8080"
 
 
 func main() {
@@ -19,17 +23,19 @@ func main() {
 
 	// UserRoutes
 
-	r.GET("/users", controller.ListUsers)
+	// r.GET("/users", controller.ListUsers)
 
-	r.GET("/user/:id", controller.GetUser)
+	// r.GET("/user/:id", controller.GetUser)
 
-	r.GET("/user/hash/:hashed_password", controller.GetUserByHash)
+	// r.GET("/user/hash/:hashed_password", controller.GetUserByHash)
 
-	r.POST("/register", controller.CreateUser)
+	r.POST("/register", Authcontroller.Register)
 
-	r.PATCH("/users", controller.UpdateUser)
+	r.POST("/login" , Authcontroller.Login)
 
-	r.DELETE("/users/:id", controller.DeleteUser)
+	// r.PATCH("/users", controller.UpdateUser)
+
+	// r.DELETE("/users/:id", controller.DeleteUser)
 
 
 

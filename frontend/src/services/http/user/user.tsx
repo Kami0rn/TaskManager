@@ -1,7 +1,7 @@
 import { UserInterface } from "../../../interfaces/Iuser";
 
 
-const apiUrl = "http://localhost:8084";
+const apiUrl = "http://localhost:8080";
 
 //start
 async function GetUsers() {

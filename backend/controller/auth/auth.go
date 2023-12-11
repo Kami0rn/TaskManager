@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"github.com/Kami0rn/TaskManager/entity"
 	"fmt"
+	"github.com/Kami0rn/TaskManager/entity"
 	"os"
 	"time"
 
@@ -18,11 +18,17 @@ var hmacSampleSecret []byte
 
 // Binding from JSON
 type RegisterBody struct {
-	Username string `json:"username" binding:"required"`
-	Password string `json:"password" binding:"required"`
-	Fullname string `json:"fullname" binding:"required"`
-	Avatar   string `json:"avatar" binding:"required"`
+	Username    string `json:"username" binding:"required"`
+	Password    string `json:"password" binding:"required"`
+	Fullname    string `json:"fullname" binding:"required"`
+	Email       string `json:"email" binding:"required"`
+	PhoneNumber int `json:"phonenumber" binding:"required"`
+	Bio string
+	ProfilePic string
+	TierID *uint
+
 }
+
 
 func Register(c *gin.Context) {
 	var json RegisterBody
@@ -31,17 +37,32 @@ func Register(c *gin.Context) {
 		return
 	}
 	// Check user Exist
-	var userExist orm.User
-	orm.Db.Where("username = ?", json.Username).First(&userExist)
+	var userExist entity.User
+	db := entity.DB()
+	db.Where("username = ?", json.Username).First(&userExist)
 	if userExist.ID > 0 {
 		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "User already exists"})
 		return
 	}
 
+	var tierID uint
+	if json.TierID == nil {
+		tierID = 1 // Assign default value 1 if TierID is not provided
+		json.TierID = &tierID // Assign the address of tierID to the TierID pointer
+	}
 	//create user
 	encryptedPassword, _ := bcrypt.GenerateFromPassword([]byte(json.Password), 10)
-	user := orm.User{Username: json.Username, Password: string(encryptedPassword), Fullname: json.Fullname, Avatar: json.Avatar}
-	orm.Db.Create(&user)
+	user := entity.User{
+		UserName: json.Username, 
+		Password: string(encryptedPassword), 
+		FullName: json.Fullname, 
+		Email: json.Email ,
+		PhoneNumber: json.PhoneNumber ,
+		Bio: json.Bio,
+		ProfilePic: json.ProfilePic,
+		TierID:      json.TierID , // Set the TierID here
+	}
+	db.Create(&user) 
 	if user.ID > 0 {
 		c.JSON(http.StatusOK, gin.H{
 			"status":  "ok",
@@ -60,13 +81,14 @@ type LoginBody struct {
 }
 
 func Login(c *gin.Context) {
+	db := entity.DB()
 	var json LoginBody
 	if err := c.ShouldBindJSON(&json); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	var userExist orm.User
-	orm.Db.Where("username = ?", json.Username).First(&userExist)
+	var userExist entity.User
+	db.Where("user_name = ?", json.Username).First(&userExist)
 	if userExist.ID == 0 {
 		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "User does not exists"})
 		return
@@ -74,9 +96,10 @@ func Login(c *gin.Context) {
 	err := bcrypt.CompareHashAndPassword([]byte(userExist.Password), []byte(json.Password))
 	if err == nil {
 		hmacSampleSecret := []byte(os.Getenv("JWT_SECRET_KEY"))
+
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"userId": userExist.ID,
-			"exp": time.Now().Add(time.Minute * 7).Unix(),
+			"exp":    time.Now().Add(time.Minute * 7).Unix(),
 		})
 		tokenString, err := token.SignedString(hmacSampleSecret)
 		fmt.Println(tokenString, err)
