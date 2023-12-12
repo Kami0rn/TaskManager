@@ -31,7 +31,7 @@ function Register() {
         ProfilePic: inputs.ProfilePic,
       });
 
-      if (result && result.status === true) {
+      if (result && result.status === "ok") {
         MySwal.fire({
           html: <i>{result.message}</i>,
           icon: "success",
@@ -39,8 +39,7 @@ function Register() {
           navigate("/");
         });
       } else {
-        const message =
-          result && result.message ? result.message : "No result message";
+        const message = result && result.message ? result.message : "No result message";
         MySwal.fire({
           html: <i>{message}</i>,
           icon: "error",

@@ -93,10 +93,10 @@ async function CreateUser(data: UserInterface) {
   let res = await fetch(`${apiUrl}/register`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
-      if (res.data) {
-        return { status: true, message: res.data };
+      if (res.status === "ok")  {
+        return { status: "ok", message: res.message };
       } else {
-        return { status: false, message: res.error };
+        return { status: "error", message: res.message };
       }
     });
 
