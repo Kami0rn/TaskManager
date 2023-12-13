@@ -36,10 +36,11 @@ function Register() {
           html: <i>{result.message}</i>,
           icon: "success",
         }).then((value) => {
-          navigate("/");
+          navigate("/login");
         });
       } else {
-        const message = result && result.message ? result.message : "No result message";
+        const message =
+          result && result.message ? result.message : "No result message";
         MySwal.fire({
           html: <i>{message}</i>,
           icon: "error",
@@ -54,8 +55,9 @@ function Register() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="w-full max-w-xs">
+      
+      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <label>
           Fname:
           <input
