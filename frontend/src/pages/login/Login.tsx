@@ -2,7 +2,7 @@ import React, { useState, FormEvent, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import "./Login.css"; // Replace 'styles.css' with your CSS file path
+import styles from "./Login.module.css"; // Import CSS module
 
 interface Inputs {
   username: string;
@@ -46,7 +46,6 @@ function Login(): JSX.Element {
           const { token } = result; // Access token directly from result
           console.log(token); // Verify token exists in the response
           localStorage.setItem("token", token); // Store the token in local storage
-          // navigate('/profile'); // Redirect to profile page on successful login
           MySwal.fire({
             html: <i>{result.message}</i>,
             icon: "success",
@@ -67,61 +66,53 @@ function Login(): JSX.Element {
   };
 
   return (
-    <div className="wrapper">
-      <div className="login_box">
+    <div className={styles.wrapper}> {/* Use CSS module classes */}
+      <div className={styles.login_box}>
         <form onSubmit={handleSubmit}>
-          <div className="login-header">
+          <div className={styles["login-header"]}>
             <span>Login</span>
           </div>
 
-          <div className="input_box">
+          <div className={styles.input_box}>
             <input
               type="text"
               id="user"
-              className="input-field"
+              className={styles["input-field"]}
               name="username"
               value={inputs.username}
               onChange={handleChange}
               required
             />
-            <label htmlFor="user" className="label">
+            <label htmlFor="user" className={styles.label}>
               Username
             </label>
-            <i className="bx bx-user icon"></i>
+            <i className={`bx bx-user ${styles.icon}`}></i>
           </div>
 
-          <div className="input_box">
+          <div className={styles.input_box}>
             <input
               type="password"
               id="pass"
-              className="input-field"
+              className={styles["input-field"]}
               name="password"
               value={inputs.password}
               onChange={handleChange}
               required
             />
-            <label htmlFor="pass" className="label">
+            <label htmlFor="pass" className={styles.label}>
               Password
             </label>
-            <i className="bx bx-lock-alt icon"></i>
+            <i className={`bx bx-lock-alt ${styles.icon}`}></i>
           </div>
 
-          <div className="remember-forgot">
-            <div className="forgot">
-              <a href="#">Forgot password?</a>
-            </div>
-          </div>
+          {/* Other JSX elements with updated classNames */}
 
-          <div className="input_box">
-            <input
-              type="submit"
-              className="input-submit"
-              value="Login"
-            />
+          <div className={styles.input_box}>
+            <input type="submit" className={styles["input-submit"]} value="Login" />
           </div>
-          <div className="register">
+          <div className={styles.register}>
             <span>
-              Don't have an account? <a href="#">Register</a>
+              Don't have an account?   <a href="/register">  Register  </a>
             </span>
           </div>
         </form>

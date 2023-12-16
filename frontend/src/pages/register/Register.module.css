@@ -1,0 +1,105 @@
+.registerBG{
+  background-color: #FFF8F0;
+}
+.form{
+
+  display: grid;
+  column-gap: 16px;
+  row-gap: 16px;
+  max-width: 700px;
+  margin-top: 2%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+
+}
+.registerBox{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color:#676F9D;
+  border-radius: 2%  ;
+  
+  
+  
+ 
+
+}
+.ant-row{
+  margin: 7%;
+}
+
+.registerBox{
+  display: flex ;
+  flex-direction: row;
+  
+}
+.registerBox img{
+  width: 100%;
+  height: 100%;
+  object-fit: fill ;
+  background-color: black;
+  border-radius: 2%
+
+}
+.leftRegistPic {
+  width: 1000px;
+  height: 1000px;
+  align-content: center;
+  justify-content: center;
+  
+}
+.rightRegist {
+  margin-top: 9%;
+  
+}
+input{
+  height:37px;
+}
+
+.ant-space{
+  row-gap: 0;
+  background-color: #424769;
+}
+.subBTN{
+  width: 20%;
+  max-width: 100px;
+  color: #2D3250;
+}
+#Comname {
+  margin: 7%;
+  color: #ffff;
+}
+
+#Signup{
+  color: #ffff;
+  margin-top: 40px;
+}
+#donthave{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.leftRegist
+{
+  background-color: #2D3250;
+  width: 50%;
+  padding: 2%;
+}
+
+
+.Box {
+  width: 50%;
+}
+
+
+#login{
+  color: #F9B17A;
+}
+
+#donthave {
+  color: #676F9D;
+}
