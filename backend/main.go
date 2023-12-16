@@ -7,6 +7,8 @@ import (
 
 	"github.com/Kami0rn/TaskManager/entity"
 
+	"github.com/Kami0rn/TaskManager/middleware"
+
 	Authcontroller "github.com/Kami0rn/TaskManager/controller/auth"
 
 	// Usercontroller "github.com/Kami0rn/TaskManager/controller"
@@ -32,6 +34,11 @@ func main() {
 	r.POST("/register", Authcontroller.Register)
 
 	r.POST("/login" , Authcontroller.Login)
+
+	authorized := r.Group("/users" ,middleware.JWTAuthen())
+
+	// authorized.GET("/readall", Usercontroller.ReadAll)
+	// authorized.GET("/profile", Usercontroller.Profile)
 
 	// r.PATCH("/users", controller.UpdateUser)
 
