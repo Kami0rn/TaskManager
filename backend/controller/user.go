@@ -114,6 +114,7 @@ func Profile(c *gin.Context) {
 	var user entity.User
 	db.First(&user, userId)
 	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "User Read Success", "user": user})
+	return
 }
 
 // GET /user/:id
