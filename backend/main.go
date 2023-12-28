@@ -25,13 +25,7 @@ func main() {
 	r := gin.Default()
 	r.Use(CORSMiddleware())
 
-	// UserRoutes
 
-	// r.GET("/users", controller.ListUsers)
-
-	// r.GET("/user/:id", controller.GetUser)
-
-	// r.GET("/user/hash/:hashed_password", controller.GetUserByHash)
 
 	r.POST("/register", Authcontroller.Register)
 
@@ -42,9 +36,12 @@ func main() {
 	authorized.GET("/readall", Controller.ReadAll)
 	authorized.GET("/profile", Controller.Profile)
 
-	// r.PATCH("/users", controller.UpdateUser)
+	authorized.POST("/createProjects" , Controller.CreateProject)
+	authorized.GET("/getProject/:id", Controller.GetProject)
+	
+	
 
-	// r.DELETE("/users/:id", controller.DeleteUser)
+
 
 
 

@@ -102,8 +102,8 @@ func Login(c *gin.Context) {
 		tokenString, err := token.SignedString(hmacSampleSecret)
 		fmt.Println(tokenString, err)
 
-		c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Login Success", "token": tokenString})
+		c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Login Success", "token": tokenString , "userId":  userExist.ID ,})
 	} else {
-		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Login failed"})
+		c.JSON(http.StatusOK, gin.H{"status": "error", "message": "Login failed ,"})
 	}
 }
