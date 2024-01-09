@@ -1,0 +1,1 @@
+ตั้งค่าตัวค่าคงที่เช่น timeout , saltJWT ไปที่ backen->.env
