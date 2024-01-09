@@ -38,6 +38,7 @@ func main() {
 
 	authorized.POST("/createProjects" , Controller.CreateProject)
 	authorized.GET("/getProject/:id", Controller.GetProject)
+	authorized.GET("/listProjects", Controller.ListProject)
 	
 	
 

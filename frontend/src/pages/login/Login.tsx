@@ -28,7 +28,7 @@ function Login(): JSX.Element {
     const raw = JSON.stringify({
       username: inputs.username,
       password: inputs.password,
-      expiresIn: 600000,
+      expiresIn: 6000000000000000000000000000,
     });
 
     const requestOptions: RequestInit = {
@@ -43,9 +43,11 @@ function Login(): JSX.Element {
       .then((result) => {
         console.log(result); // Log the entire response
         if (result.status === "ok") {
-          const { token } = result; // Access token directly from result
+          const { token } = result;
+          const { userId } = result;  // Access token directly from result
           console.log(token); // Verify token exists in the response
-          localStorage.setItem("token", token); // Store the token in local storage
+          localStorage.setItem("token", token); 
+          localStorage.setItem("userId", userId);// Store the token in local storage
           MySwal.fire({
             html: <i>{result.message}</i>,
             icon: "success",

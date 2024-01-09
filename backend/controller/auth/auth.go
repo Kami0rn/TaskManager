@@ -5,6 +5,7 @@ import (
 	"github.com/Kami0rn/TaskManager/entity"
 	"os"
 	"time"
+	"strconv"
 
 	// "go/token"
 	"net/http"
@@ -95,9 +96,17 @@ func Login(c *gin.Context) {
 	if err == nil {
 		hmacSampleSecret := []byte(os.Getenv("JWT_SECRET_KEY"))
 
+		timeoutStr := os.Getenv("TIME_OUT")
+		timeout, err := strconv.Atoi(timeoutStr)
+		if err != nil {
+			// Handle error if TIME_OUT is not set or not a valid integer
+			// You can set a default timeout value in case of an error
+			timeout = 7 // Defaulting to 7 minutes if TIME_OUT is not set or not a valid integer
+		}
+	
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"userId": userExist.ID,
-			"exp":    time.Now().Add(time.Minute * 7).Unix(),
+			"exp":    time.Now().Add(time.Minute * time.Duration(timeout)).Unix(),
 		})
 		tokenString, err := token.SignedString(hmacSampleSecret)
 		fmt.Println(tokenString, err)

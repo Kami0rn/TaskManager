@@ -7,6 +7,8 @@ import Register from './pages/register/Register';
 import Router from './pages/router/Router'
 import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
+import Project from './pages/Project/Project';
+import UseProject from './pages/UseProject/UseProject';
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path='/router' element={<Router />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/project' element={<Project />}/>
+          <Route path='/useProject' element={<UseProject />}/>
           
         </Routes>
 

@@ -1,0 +1,89 @@
+{
+            "ID": 1,
+            "CreatedAt": "2024-01-10T15:04:05Z",
+            "UpdatedAt": "2024-01-10T15:04:05Z",
+            "DeletedAt": null,
+            "ProjectName": "Rew",
+            "ProjectCreatedDate": "2024-01-10T15:04:05Z",
+            "WorkspaceID": 1,
+            "Workspace": {
+                "ID": 0,
+                "CreatedAt": "0001-01-01T00:00:00Z",
+                "UpdatedAt": "0001-01-01T00:00:00Z",
+                "DeletedAt": null,
+                "WorkspaceName": "",
+                "Description": "",
+                "Image": "",
+                "WorkspaceCreatedDate": "0001-01-01T00:00:00Z",
+                "TeamID": null,
+                "Team": {
+                    "ID": 0,
+                    "CreatedAt": "0001-01-01T00:00:00Z",
+                    "UpdatedAt": "0001-01-01T00:00:00Z",
+                    "DeletedAt": null,
+                    "TeamName": "",
+                    "TeamCreateDate": "0001-01-01T00:00:00Z",
+                    "TeamStatusID": null,
+                    "TeamStatus": {
+                        "ID": 0,
+                        "CreatedAt": "0001-01-01T00:00:00Z",
+                        "UpdatedAt": "0001-01-01T00:00:00Z",
+                        "DeletedAt": null,
+                        "TeamStatus": "",
+                        "Teams": null
+                    },
+                    "Workspaces": null,
+                    "Teammates": null
+                },
+                "WorkspaceStatusID": null,
+                "WorkspaceStatus": {
+                    "ID": 0,
+                    "CreatedAt": "0001-01-01T00:00:00Z",
+                    "UpdatedAt": "0001-01-01T00:00:00Z",
+                    "DeletedAt": null,
+                    "WorkspaceStatus": "",
+                    "Workspaces": null
+                },
+                "Projects": null
+            },
+            "ProjectSettingID": 1,
+            "ProjectSetting": {
+                "ID": 0,
+                "CreatedAt": "0001-01-01T00:00:00Z",
+                "UpdatedAt": "0001-01-01T00:00:00Z",
+                "DeletedAt": null,
+                "BackgroundID": null,
+                "Background": {
+                    "ID": 0,
+                    "CreatedAt": "0001-01-01T00:00:00Z",
+                    "UpdatedAt": "0001-01-01T00:00:00Z",
+                    "DeletedAt": null,
+                    "ColorCode": "",
+                    "ProjectSettings": null
+                },
+                "FontID": null,
+                "Font": {
+                    "ID": 0,
+                    "CreatedAt": "0001-01-01T00:00:00Z",
+                    "UpdatedAt": "0001-01-01T00:00:00Z",
+                    "DeletedAt": null,
+                    "ColorCode": "",
+                    "ProjectSettings": null
+                },
+                "Projects": null
+            },
+            "ProjectStatusID": 1,
+            "ProjectStatus": {
+                "ID": 0,
+                "CreatedAt": "0001-01-01T00:00:00Z",
+                "UpdatedAt": "0001-01-01T00:00:00Z",
+                "DeletedAt": null,
+                "ProjectStatus": "",
+                "Projects": null
+            },
+            "Calendars": null,
+            "Lists": null,
+            "ProjectHistorys": null
+        }
+
+โครงสร้าง body ของ json project โดยย่อ 

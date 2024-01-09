@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
@@ -64,8 +64,9 @@ function Profile() {
 
   const logout = () => {
     localStorage.removeItem('token');
-    navigate('/');
+    navigate('/login');
   };
+
 
   return (
     <div>
@@ -78,7 +79,8 @@ function Profile() {
         <img src={user.avatar} alt="User Avatar" width={100} />
       </div>
       <div>
-        <button onClick={logout}>logout</button>
+        <button onClick={logout} className='text-red-700'>logout</button>
+        <Link to='/useProject' className='m-5 text-teal-600'>useProject</Link>
       </div>
     </div>
   );
