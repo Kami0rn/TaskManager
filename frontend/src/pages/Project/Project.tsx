@@ -1,9 +1,16 @@
 import React from 'react'
+import ProjectSidebar from './ProjectSidebar'
 
-function UseProject() {
+function Project() {
   return (
-    <div>UseProject</div>
+    <div className="projectIndex flex">
+      <ProjectSidebar />
+      <div className="projectIndex flex" >
+        Body
+      </div>
+
+    </div>
   )
 }
 
-export default UseProject
+export default Project

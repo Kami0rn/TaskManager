@@ -80,7 +80,7 @@ function Profile() {
       </div>
       <div>
         <button onClick={logout} className='text-red-700'>logout</button>
-        <Link to='/useProject' className='m-5 text-teal-600'>useProject</Link>
+        <Link to='/Project' className='m-5 text-teal-600'>Project</Link>
       </div>
     </div>
   );

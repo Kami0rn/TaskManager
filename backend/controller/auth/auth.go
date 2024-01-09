@@ -101,7 +101,7 @@ func Login(c *gin.Context) {
 		if err != nil {
 			// Handle error if TIME_OUT is not set or not a valid integer
 			// You can set a default timeout value in case of an error
-			timeout = 7 // Defaulting to 7 minutes if TIME_OUT is not set or not a valid integer
+			timeout = 60 // Defaulting to 7 minutes if TIME_OUT is not set or not a valid integer
 		}
 	
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
