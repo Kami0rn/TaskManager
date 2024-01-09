@@ -10,14 +10,11 @@ import (
 
 const PORT = "8084"
 
-
 func main() {
 
 	entity.SetupDatabase()
 
 	r := gin.Default()
-
-
 
 	r.Use(CORSMiddleware())
 
@@ -35,12 +32,33 @@ func main() {
 
 	r.DELETE("/users/:id", controller.DeleteUser)
 
+	r.GET("/roles", controller.ListRoles)
 
+	r.GET("/role/:id", controller.GetRole)
+
+	r.GET("/teamstatuses", controller.ListTeamStatuses)
+
+	r.GET("/teamstatus/:id", controller.GetTeamStatus)
+
+	r.POST("/teams", controller.CreateTeam)
+
+	r.PATCH("/teams", controller.UpdateTeam)
+
+	r.GET("/teams", controller.ListTeams)
+
+	r.GET("/teammates", controller.ListTeammates)
+
+	r.GET("/teammates/team/:id", controller.GetUserFromTeamID)
+
+	r.GET("/teammate/:id", controller.GetTeammate)
+
+	r.POST("/teammates", controller.CreateTeammate)
+
+	r.POST("/leaders", controller.CreateLeader)
 
 	r.Run("localhost: " + PORT)
 
 }
-
 
 func CORSMiddleware() gin.HandlerFunc {
 
@@ -52,8 +70,7 @@ func CORSMiddleware() gin.HandlerFunc {
 
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
 
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
-
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE, PATCH")
 
 		if c.Request.Method == "OPTIONS" {
 
@@ -62,7 +79,6 @@ func CORSMiddleware() gin.HandlerFunc {
 			return
 
 		}
-
 
 		c.Next()
 
