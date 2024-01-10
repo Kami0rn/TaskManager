@@ -40,7 +40,7 @@ func main() {
 	authorized.GET("/getProject/:id", Controller.GetProject)
 	authorized.GET("/listProjects", Controller.ListProject)
 	
-	
+	authorized.GET("/projectGetListsFromID/:projectId", Controller.GetListsFromID)
 
 
 
