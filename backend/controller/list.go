@@ -2,14 +2,51 @@ package controller
 
 import (
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/Kami0rn/TaskManager/entity"
 	"github.com/gin-gonic/gin"
-	"strconv"
-
 )
 
+func CreateList(c *gin.Context) {
+    var list entity.List
+    var project entity.Project
 
+    if err := c.ShouldBindJSON(&list); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    projectIdStr := c.Param("projectId")
+    projectId, err := strconv.ParseUint(projectIdStr, 10, 64)
+    if err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid project ID"})
+        return
+    }
+
+    // Find project based on projectID
+    if err := entity.DB().First(&project, projectId).Error; err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "project not found"})
+        return
+    }
+
+    // Create List
+    newList := entity.List{
+        ListName:        list.ListName,
+        ListDescription: list.ListDescription,
+        ListCrateDate:   time.Now(),
+        Project:         project,
+    }
+
+    // Save to database
+    if err := entity.DB().Create(&newList).Error; err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    c.JSON(http.StatusOK, gin.H{"data": newList})
+}
 
 
 func GetListsFromID(c *gin.Context) {
@@ -31,4 +68,3 @@ func GetListsFromID(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Lists Read Success", "lists": lists})
 }
-

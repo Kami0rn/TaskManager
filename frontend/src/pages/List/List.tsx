@@ -2,8 +2,18 @@ import React from "react";
 import { GetListByProjectId } from "../../services/http/list/list";
 import { useState, useEffect } from "react";
 import { ListInterface } from "../../interfaces/Ilist";
+import CreateList from "./CreateList";
+import "./List.css"
+
 function List() {
+  const handleCreateListClick = () => {
+    setShowCreateList(true);
+  };
+  const handleCreateListClose = () => {
+    setShowCreateList(false);
+  };
   const [lists, setLists] = useState<ListInterface[]>([]);
+  const [showCreateList, setShowCreateList] = useState(false);
   useEffect(() => {
     async function fetchListData() {
       const projectId = 1; // Replace this with the project ID
@@ -30,8 +40,20 @@ function List() {
               <div>+ Add new card</div>
             </button>
           </li>
+          
         ))}
+        <button className="w-10 h-10 bg-slate-400 rounded-md" onClick={handleCreateListClick}>+</button>
       </ul>
+      {showCreateList && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={handleCreateListClose}>
+              &times;
+            </span>
+            <CreateList />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

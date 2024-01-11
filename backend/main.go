@@ -41,7 +41,7 @@ func main() {
 	authorized.GET("/listProjects", Controller.ListProject)
 	
 	authorized.GET("/projectGetListsFromID/:projectId", Controller.GetListsFromID)
-
+	authorized.POST("/createList/:projectId",Controller.CreateList)
 
 
 
