@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Swal, { SweetAlertOptions } from "sweetalert2";
-import './CreateList.css'
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css"; // Import SweetAlert2 CSS
+import "./CreateList.css";
+
 function CreateList() {
   const navigate = useNavigate();
   const [listName, setListName] = useState("");
@@ -46,6 +48,19 @@ function CreateList() {
 
       if (!response.ok) {
         const errorResponse = await response.json().catch(() => ({}));
+
+        if (errorResponse && errorResponse.error) {
+          // Display the error message using SweetAlert
+          Swal.fire({
+            html: `<i>${errorResponse.error}</i>`,
+            icon: "error",
+            customClass: {
+              container: "swal-container",
+            },
+          });
+          return;
+        }
+
         throw new Error(
           `HTTP error! Status: ${response.status}, Error: ${JSON.stringify(
             errorResponse
@@ -56,12 +71,13 @@ function CreateList() {
       const responseData = await response.json();
       console.log("List created successfully:", responseData);
 
-      const swalOptions: SweetAlertOptions = {
-        html: <i>{responseData.message}</i>,
+      Swal.fire({
+        html: `<i>${responseData.message}</i>`,
         icon: "success",
-      };
-
-      Swal.fire(swalOptions).then((result) => {
+        customClass: {
+          container: "swal-container",
+        },
+      }).then((result) => {
         if (result.isConfirmed) {
           // Refresh the page if the status is OK
           if (response.status === 200) {

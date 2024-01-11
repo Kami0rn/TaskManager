@@ -9,7 +9,7 @@ import (
 type List struct {
 
 	gorm.Model
-	ListName 		string `gorm:"uniqueIndex"`
+	ListName 		string `gorm:"uniqueIndex" valid:"required~กรุณากรอกชื่อ List !"`
 	ListDescription string
 	Process 		float32
 	ListCrateDate	time.Time

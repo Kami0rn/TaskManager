@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 	"time"
-
+    "github.com/asaskevich/govalidator"
 	"github.com/Kami0rn/TaskManager/entity"
 	"github.com/gin-gonic/gin"
 )
@@ -30,7 +30,10 @@ func CreateList(c *gin.Context) {
         c.JSON(http.StatusBadRequest, gin.H{"error": "project not found"})
         return
     }
-
+    if _,err := govalidator.ValidateStruct(list); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
     // Create List
     newList := entity.List{
         ListName:        list.ListName,
