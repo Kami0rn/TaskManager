@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Swal, { SweetAlertOptions } from "sweetalert2";
+import './CreateList.css'
 function CreateList() {
   const navigate = useNavigate();
   const [listName, setListName] = useState("");
@@ -8,9 +9,6 @@ function CreateList() {
 
   const handleCreateList = async () => {
     try {
-
-
-
       const projectId = localStorage.getItem("projectId");
       const token = localStorage.getItem("token");
       console.log("projectId:", projectId);
@@ -57,6 +55,21 @@ function CreateList() {
 
       const responseData = await response.json();
       console.log("List created successfully:", responseData);
+
+      const swalOptions: SweetAlertOptions = {
+        html: <i>{responseData.message}</i>,
+        icon: "success",
+      };
+
+      Swal.fire(swalOptions).then((result) => {
+        if (result.isConfirmed) {
+          // Refresh the page if the status is OK
+          if (response.status === 200) {
+            window.location.reload();
+          }
+        }
+      });
+
       // Add any additional logic, such as closing the form or updating state
     } catch (error) {
       console.error("Error creating list:", error);
