@@ -8,13 +8,10 @@ import "./CardSlider.css"
 import CardSlider from './CardSlider';
 
 
-import { ProjectCreateModal } from './ProjectCreateModal';
-
-
-
 const Dashboard = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [projectData, setProjectData] = useState<ProjectInterface[]>([]);
+    const [archivedProjectData, setArchivedProjectData] = useState<ProjectInterface[]>([]);
 
     const HandleProjectListing = async () => {
 
@@ -33,33 +30,42 @@ const Dashboard = () => {
         }
     }
 
+    const HandleListArchivedProject = async () => {
+        let res = await ListArchivedProject();
+
+        if (res) {
+            console.log("Listed archived projects");
+            console.log(res);
+            setArchivedProjectData(res);
+        }
+        else {
+            console.log("Connot list archived project");
+            console.log(res);
+        }
+    }
+
     useEffect(() => {
         HandleProjectListing();
-    },[])
-
-    var settings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        initialSlide: 0,
-        variableWidth: true,
-    };
+    }, [])
 
     return (
-        <div className='pt-20'>
-            {contextHolder}
-            <div>
-                <h1>Recent</h1>
-                <CardSlider projectData={projectData}/>
-            </div>
-            <div>
-                <h1>Projects in this workspace</h1>
-                <CardSlider projectData={projectData}/>
-            </div>
+        <div className='flex flex-wrap w-screen h-screen pt-20'>
+            <div className='w-[140px] h-screen bg-white'>
 
-            
+            </div>
+            <div className='ml-12'>
+                {contextHolder}
+                <div>
+                    <h1>Recent</h1>
+                    <CardSlider projectData={projectData} />
+                </div>
+                <div>
+                    <h1>Projects in this workspace</h1>
+                    <CardSlider projectData={projectData} />
+                </div>
+                <Button onClick={() => HandleListArchivedProject()}>Achived projects</Button>
+
+            </div>
         </div>
     );
 }

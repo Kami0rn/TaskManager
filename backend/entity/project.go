@@ -10,6 +10,7 @@ type Project struct {
 	gorm.Model
 	ProjectName 		string 	`gorm:"uniqueIndex"`
 	ProjectCreatedDate	time.Time
+	ProjectProgress		float32 `gorm:"default:0"`
 
 	//fk
 	WorkspaceID 		*uint

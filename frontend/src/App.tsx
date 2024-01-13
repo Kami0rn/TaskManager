@@ -5,6 +5,8 @@ import Nav from '../src/etc/Nav';
 import Register from './pages/register/Register';
 import Router from './pages/router/Router'
 import Login from './pages/login/Login';
+import Dashboard from './pages/dashboard/dashboard';
+import ProjectPage from './pages/ProjectPage/ProjectPage';
 
 
 function App() {
@@ -18,7 +20,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path='/router' element={<Router />} />
-          
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/projectPage' element={<ProjectPage />} />
         </Routes>
 
         

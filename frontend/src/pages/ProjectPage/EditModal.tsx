@@ -1,16 +1,15 @@
 import { Button, ConfigProvider, Form, Input, Select, message } from 'antd';
 import React, { useEffect, useState } from 'react'
 
-import './ProjectCreateModal.css'
 import { ProjectInterface } from '../../interfaces/IProject';
-import { CreateProject } from '../../services/http/project/project';
+import { CreateProject, UpdateProject } from '../../services/http/project/project';
 import { useNavigate } from 'react-router-dom';
 import { ListWorkspaceByTeamID } from '../../services/http/workspace/workspace';
 import { WorkspaceInterface } from '../../interfaces/IWorkspace';
 
 const { DateTime } = require("luxon");
 
-export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onClose: any }) => {
+export const ProjectEditModal = ({ visible, onClose, project }: { visible: boolean, onClose: any, project: ProjectInterface}) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [projectData, setProjectData] = useState<ProjectInterface>();
   const [workspaceData, setWorkspaceData] = useState<WorkspaceInterface[]>([])
@@ -19,6 +18,42 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
 
   const [form] = Form.useForm();
 
+  const handleOnclose = (e: any) => {
+    if (e.target.id === "dashboard")
+      onClose();
+  };
+
+  const HandleProjectUpddate = async (value: ProjectInterface) => {
+    value.ID = project?.ID;
+    value.ProjectCreatedDate = project.ProjectCreatedDate;
+    value.ProjectSettingID = project.ProjectSettingID;
+    value.ProjectStatusID = project.ProjectStatusID;
+    
+    console.log(value);
+    
+    let res = await UpdateProject(value)
+    
+    if (res.status) {
+      messageApi.open({
+        type: "success",
+        content: "Update successful"
+      })
+      console.log(projectData);
+      console.log(res);
+      setTimeout(() => {
+        onClose();
+      }, 1000)
+    }
+    else {
+      messageApi.open({
+        type: "error",
+        content: "Something's wrong!"
+      })
+      console.log("Update Failed");
+      console.log(res);
+    }
+  }
+
   const ListWorkspace = async (teamID:number) => {
     let res = await ListWorkspaceByTeamID(teamID);
 
@@ -26,6 +61,12 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
       console.log(res);
       console.log("got workspace");
       setWorkspaceData(res);
+
+      form.setFieldsValue({ 
+        ProjectName: project.ProjectName ,
+        WorkspaceID : project.WorkspaceID ,
+    });
+
     }
     else{
       console.log(res);
@@ -33,47 +74,9 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
     }
   }
 
-  // Must receive teamID from local storage
   useEffect(() => {
     ListWorkspace(1);
   },[])
-  /////////////////////////////////////////
-
-  const handleOnclose = (e: any) => {
-    if (e.target.id === "dashboard")
-      onClose();
-  };
-
-  // Might be hard code
-  const HandleProjectCreation = async (value: ProjectInterface) => {
-    value.ProjectCreatedDate = DateTime.now();
-    value.ProjectSettingID = 1;
-    value.ProjectStatusID = 1;
-    console.log(value);
-
-    let res = await CreateProject(value)
-    if (res.status) {
-      messageApi.open({
-        type: "success",
-        content: "Create successful"
-      })
-      console.log(projectData);
-      console.log(res);
-      setTimeout(() => {
-        form.resetFields();
-        onClose();
-        //navigate(`/projectPage`);
-      }, 3000)
-    }
-    else {
-      messageApi.open({
-        type: "error",
-        content: "Something's wrong!"
-      })
-      console.log("Create Failed");
-      console.log(res);
-    }
-  }
 
   if (!visible) return null;
   return (
@@ -82,7 +85,7 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
       className='fixed inset-0 mt-20 mr-5 bg-opacity-30 flex items-start justify-end z-50' >
       {contextHolder}
       <div  className="flex flex-col bg-[#2d2d2d] p-2 rounded h-[295px] w-[366px] shadow-md text-white">
-        <h1 className='place-self-center'>Create project</h1>
+        <h1 className='place-self-center'>Edit project</h1>
         <ConfigProvider
           theme={{
             components: {
@@ -92,7 +95,7 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
             },
           }}
         >
-          <Form form={form} layout='vertical' onFinish={HandleProjectCreation}>
+          <Form form={form} layout='vertical' onFinish={HandleProjectUpddate}>
             <Form.Item name="ProjectName" label='Project name' rules={[{ required: true, message: 'Project name is required!' }]}>
               <Input />
             </Form.Item>
@@ -116,7 +119,7 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
                   },
                 }}
               >
-                <Button type="primary" htmlType="submit" className='project-create-button' block>Create</Button>
+                <Button type="primary" htmlType="submit" className='project-create-button' block>Save</Button>
               </ConfigProvider>
 
             </Form.Item>

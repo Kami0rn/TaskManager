@@ -36,6 +36,15 @@ func main() {
 	r.DELETE("/users/:id", controller.DeleteUser)
 
 
+	// ProjectRoutes
+	r.POST("/createProjects", controller.CreateProject)
+	r.GET("/getProject/:id", controller.GetProject)
+	r.GET("/listProjects", controller.ListProject)
+	r.GET("/archivedProjects", controller.ListArchivedProject)
+	r.PATCH("/updateProject", controller.UpdateProject)
+
+	// Workspace
+	r.GET("/getWorkspaceTeamID/:id", controller.ListWorkspaceByTeamID)
 
 	r.Run("localhost: " + PORT)
 
