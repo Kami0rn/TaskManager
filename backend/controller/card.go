@@ -58,21 +58,21 @@ func CreateCard(c *gin.Context) {
 
 
 func GetCardFromListID(c *gin.Context) {
-	projectIdStr := c.Param("projectId") // Get the projectId from the URL params
-	projectId, err := strconv.ParseUint(projectIdStr, 10, 64)
+	listIDStr := c.Param("listID") // Get the projectId from the URL params
+	listID, err := strconv.ParseUint(listIDStr, 10, 64)
 	// Get the project ID from the request or wherever it's available
 	if err != nil {
 		// Handle error - parsing failed
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid project ID"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid list ID"})
 		return
 	}
-	c.Set("projectId", uint(projectId)) // Assuming projectId is of type uint
+	c.Set("listID", uint(listID)) // Assuming projectId is of type uint
 
 	db := entity.DB()
-	var lists []entity.List
+	var cards []entity.Card
 
 	// Fetch all lists related to the specific project ID
-	db.Where("project_id = ?", projectId).Find(&lists)
+	db.Where("list_id = ?", listID).Find(&cards)
 
-	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Lists Read Success", "lists": lists})
+	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Cards Read Success", "lists": cards})
 }

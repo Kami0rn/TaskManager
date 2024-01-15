@@ -42,7 +42,8 @@ func main() {
 	
 	authorized.GET("/projectGetListsFromID/:projectId", Controller.GetListsFromID)
 	authorized.POST("/createList/:projectId",Controller.CreateList)
-	authorized.GET("/projectCreateCardFromListID/:listID", Controller.CreateCard)
+	authorized.GET("/projectGetCardsFromListID/:listID", Controller.GetCardFromListID)
+	authorized.POST("/projectCreateCardFromListID/:listID", Controller.CreateCard)
 
 
 
