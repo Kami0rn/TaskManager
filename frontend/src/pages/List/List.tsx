@@ -34,7 +34,7 @@ function List() {
         {lists.map((list, index) => (
           <li
             key={list.ID}
-            className="ListBox bg-slate-400 rounded-md mx-2 w-2/12 flex flex-col justify-center align-center"
+            className="ListBox bg-slate-400 rounded-md mx-2 w-2/12 flex flex-col  align-center"
           >
             <h3 className="m-3">{list.ListName}</h3>
             <ul>
