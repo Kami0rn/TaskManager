@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { GetListByProjectId } from "../../services/http/list/list";
-import { useState, useEffect } from "react";
 import { ListInterface } from "../../interfaces/Ilist";
 import CreateList from "./CreateList";
-import "./List.css"
+import "./List.css";
 
 function List() {
   const handleCreateListClick = () => {
@@ -14,6 +13,7 @@ function List() {
   };
   const [lists, setLists] = useState<ListInterface[]>([]);
   const [showCreateList, setShowCreateList] = useState(false);
+
   useEffect(() => {
     async function fetchListData() {
       const projectId = 1; // Replace this with the project ID
@@ -26,6 +26,7 @@ function List() {
 
     fetchListData();
   }, []);
+
   return (
     <div>
       <h1>List Items</h1>
@@ -35,14 +36,24 @@ function List() {
             key={list.ID}
             className="ListBox bg-slate-400 rounded-md mx-2 w-2/12 flex flex-col justify-center align-center"
           >
-            <h3 className="m-3 ">{list.ListName}</h3>
+            <h3 className="m-3">{list.ListName}</h3>
+            <ul>
+              {list.Cards &&
+                list.Cards.map((card) => (
+                  <li key={card.ID} className="CardBox m-2 p-2 bg-slate-200 rounded-md">
+                    <h4>{card.CardName}</h4>
+                    <p>{card.CardDescription}</p>
+                  </li>
+                ))}
+            </ul>
             <button className="bg-slate-500 w-11/12 flex my-3 mx-2 rounded-md">
               <div>+ Add new card</div>
             </button>
           </li>
-          
         ))}
-        <button className="w-10 h-10 bg-slate-400 rounded-md" onClick={handleCreateListClick}>+</button>
+        <button className="w-10 h-10 bg-slate-400 rounded-md" onClick={handleCreateListClick}>
+          +
+        </button>
       </ul>
       {showCreateList && (
         <div className="modal">

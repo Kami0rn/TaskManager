@@ -61,7 +61,6 @@ func GetListsFromID(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid project ID"})
 		return
 	}
-	c.Set("projectId", uint(projectId)) // Assuming projectId is of type uint
 
 	db := entity.DB()
 	var lists []entity.List
@@ -69,5 +68,14 @@ func GetListsFromID(c *gin.Context) {
 	// Fetch all lists related to the specific project ID
 	db.Where("project_id = ?", projectId).Find(&lists)
 
+	// Fetch cards for each list
+	for i := range lists {
+		var cards []entity.Card
+		db.Where("list_id = ?", lists[i].ID).Find(&cards)
+		lists[i].Cards = cards
+	}
+
 	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Lists Read Success", "lists": lists})
 }
+
+
