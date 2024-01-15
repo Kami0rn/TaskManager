@@ -35,7 +35,6 @@ func CreateProject(c *gin.Context) {
 		return
 	}
 
-	
 
 	// สร้าง Project
 	newProject := entity.Project{

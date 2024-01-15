@@ -8,9 +8,9 @@ import (
 
 type Project struct {
 	gorm.Model
-	ProjectName 		string 	`gorm:"uniqueIndex"`
-	ProjectCreatedDate	time.Time
-	ProjectProgress		float32 `gorm:"default:0"`
+	ProjectName 		string 	`gorm:"uniqueIndex" valid:"required~ProjectName is required, stringlength(3|50)~ProjectName is not in range(3|50)"`
+	ProjectCreatedDate	time.Time `valid:"required~ProjectCreateDate is required, isNotFuture~ProjectCreateDate is not the current time"`
+	ProjectProgress		float32 `gorm:"default:0" valid:"inRangre0To100~ProjectProgress is not in range 0 - 100"`
 
 	//fk
 	WorkspaceID 		*uint

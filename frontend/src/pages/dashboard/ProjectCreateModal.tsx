@@ -47,6 +47,7 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
   // Might be hard code
   const HandleProjectCreation = async (value: ProjectInterface) => {
     value.ProjectCreatedDate = DateTime.now();
+    // initialize as default in schema
     value.ProjectSettingID = 1;
     value.ProjectStatusID = 1;
     console.log(value);
