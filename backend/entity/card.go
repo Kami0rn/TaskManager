@@ -1,26 +1,26 @@
-package entity
+	package entity
 
-import (
-	"time"
+	import (
+		"time"
 
-	"gorm.io/gorm"
-)
+		"gorm.io/gorm"
+	)
 
-type Card struct {	
-	gorm.Model
-	CardName	 		string 
-	CardDescription	 	string 
-	CreateCard			time.Time
+	type Card struct {	
+		gorm.Model
+		CardName	 		string 
+		CardDescription	 	string 
+		CreateCard			time.Time
 
-	//FK 
-	ListID			*uint
-	List			List 		`gorm:"foreignKey:ListID"`
+		//FK 
+		ListID			*uint
+		List			List 		`gorm:"foreignKey:ListID"`
 
-	CardStatusID	*uint 
-	CardStatus 		CardStatus 	`gorm:"foreignKey:CardStatusID"`
+		CardStatusID	*uint 
+		CardStatus 		CardStatus 	`gorm:"foreignKey:CardStatusID"`
 
-	//give FK
-	Comments		[]Comment	`gorm:"foreignKey:CardID"`
-	Deadlines		[]Deadline	`gorm:"foreignKey:CardID"`
-	
-}
+		//give FK
+		Comments		[]Comment	`gorm:"foreignKey:CardID"`
+		Deadlines		[]Deadline	`gorm:"foreignKey:CardID"`
+		
+	}

@@ -64,6 +64,8 @@ function Profile() {
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('projectId');
     navigate('/login');
   };
 
