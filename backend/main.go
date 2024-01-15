@@ -43,6 +43,11 @@ func main() {
 	r.GET("/archivedProjects", controller.ListArchivedProject)
 	r.PATCH("/updateProject", controller.UpdateProject)
 
+	// ProjectHistory
+	r.POST("/createProjectHistory", controller.CreateProjectHistory)
+	r.PATCH("/updateProjectHistory", controller.UpdateProjectHistory)
+	r.GET("/getRecentProjectUserID/:id", controller.ListRecentProjectByUserID)
+
 	// Workspace
 	r.GET("/getWorkspaceTeamID/:id", controller.ListWorkspaceByTeamID)
 
