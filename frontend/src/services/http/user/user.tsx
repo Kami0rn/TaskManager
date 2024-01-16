@@ -27,7 +27,7 @@ async function GetUsers() {
 
 
 
-async function DeleteUserByID(id: Number | undefined) {
+async function DeleteUserByID(id: number | undefined) {
   const requestOptions = {
     method: "DELETE"
   };
@@ -46,7 +46,7 @@ async function DeleteUserByID(id: Number | undefined) {
 }
 
 
-async function GetUserById(id: Number | undefined) {
+async function GetUserById(id: number | undefined) {
   const requestOptions = {
     method: "GET"
   };
