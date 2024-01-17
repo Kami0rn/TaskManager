@@ -8,10 +8,10 @@ import (
 
 type Payment struct {	
 	gorm.Model
-	paymentDate		time.Time
-	totalPrice 		int
-	note 			string
-
+	PaymentDate		time.Time    // time.Time
+	TotalPrice 		int64
+	Note 			string
+	MoneySlip		string
 	//FK
 	UserID 			*uint	
 	User   			User 			`gorm:"foreignKey:UserID"`

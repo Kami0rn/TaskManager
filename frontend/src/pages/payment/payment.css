@@ -1,0 +1,233 @@
+.content_payment {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  height: 98vh;
+  background-color: black;
+  border-radius: 16px;
+  padding: 10px 10px 10px 10px;
+}
+
+.Header-in_content_payment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 10%;
+  background-color: #2d3250;
+}
+
+.Header-Text-in_content_payment {
+  color: #fff;
+  justify-content: center;
+}
+
+.content-in_content_payment {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 90%;
+  background-color: #b5c227;
+}
+
+/* ============================================== */
+
+/* Card */
+.Card-info {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 23%;
+  min-width: 282 px;
+  height: 90%;
+  /* left: 2vh; */
+  top: 5vh;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 10px 10px 10px 10px;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.Card-info_price {
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+.Card-info_ability {
+  padding-bottom: 8px;
+  height: 275px;
+}
+.Card-info_button_Space {
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+.Card-info_button {
+  justify-content: center;
+  text-align: center;
+  width: 10vw;
+  height: 5vh;
+  background-color: aqua;
+  border-radius: 10px;
+  padding: 5px;
+}
+.Card-info_button:hover {
+  cursor: pointer;
+}
+/* ============================================== */
+
+/* modal */
+.ant-modal-content-area {
+  height: 90vh;
+  padding: 10px 10px 10px 10px;
+}
+.ant-modal-body-area {
+  height: 80vh;
+  background-color: #ffffff;
+  position: relative;
+}
+.Modal-Payment-Content {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+/* Modal-Payment-selectPaymentType */
+.Modal-Payment-selectPaymentType {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 80vh;
+  background-color: #ff7a7a;
+
+  padding: 10px;
+}
+
+.Modal-PaymentType-button {
+  justify-content: center;
+  text-align: center;
+  width: 12vw;
+  height: 5vh;
+  background-color: aqua;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.Modal-PaymentType-button:hover {
+  cursor: pointer;
+}
+
+/* Modal-Payment-InputForm */
+.Modal-Payment-InputForm {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 80vh;
+  background-color: #77bb5c;
+  padding: 10px;
+}
+.Modal-Payment-InputForm-inputTotalPrice {
+  border: none;
+  border-radius: 24px;
+  border-color: #3d3d3d;
+  padding: 10px;
+}
+.Modal-Payment-InputForm-inputDate {
+  border: none;
+  border-radius: 24px;
+  padding: 10px;
+}
+.Modal-Payment-InputForm-inputNote {
+  border: none;
+  border-radius: 24px;
+  padding: 10px;
+}
+.Modal-Payment-InputForm-inputImage {
+}
+
+.Modal-Payment-InputForm-ImageArea {
+  display: flex;
+  justify-content: center;
+}
+
+/* Modal-Payment-total */
+.Modal-Payment-total {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 80vh;
+  background-color: #a3acdf;
+}
+.Modal-Payment-total-Top {
+  display: flex;
+  background-color: aqua;
+  height: 5vh;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+.Modal-Payment-total-Top-labelTopic {
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+/* Modal-Payment-total-Middle */
+.Modal-Payment-total-Middle {
+  display: flex;
+  height: 55vh;
+  background-color: #6b885f;
+  padding: 10px;
+}
+/* Modal-Payment-total-2rdMiddle */
+.Modal-Payment-total-2rdMiddle {
+  display: flex;
+  flex-direction: row;
+  height: 10vh;
+  background-color: #796d3a;
+  justify-content: center;
+  padding: 10px;
+}
+
+.Modal-Payment-total-2rdMiddle-textTotal {
+  display: flex;
+  color: #fff;
+  font-size: 5vh;
+}
+.Modal-Payment-total-2rdMiddle-space {
+  width: 10vw;
+}
+.Modal-Payment-total-2rdMiddle-textTotalPrice {
+  display: flex;
+  color: #fff;
+  font-size: 5vh;
+}
+/* Modal-Payment-total-bottom */
+.Modal-Payment-total-bottom {
+  display: flex;
+  height: 10vh;
+  background-color: #24855c;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.Modal-Payment-total-cancelButton{
+  width: 100px;
+  height: 40px;
+  border-radius: 40px;
+  border: none;
+  margin-right: 2vw;
+  text-align: center;
+}
+.Modal-Payment-total-confirmButton {
+  width: 100px;
+  height: 40px;
+  border-radius: 40px;
+  border: none;
+  text-align: center;
+  
+}

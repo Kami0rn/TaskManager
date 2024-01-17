@@ -35,10 +35,25 @@ func main() {
 
 	r.DELETE("/users/:id", controller.DeleteUser)
 
+	
 
+	//Payment
+	r.GET("/payment/:userID", controller.GetPaymentByUserID)
+	r.GET("/payment/edit/:paymentID", controller.GetPaymentByPaymentID)
+
+	r.POST("/payment", controller.CreatePayment)
+	
+	r.PATCH("/payment",controller.UpdatePayment)
+
+	r.DELETE("/payment/:paymentID",controller.DeletePayment)
+
+	//tier
+	r.GET("/tier",controller.GetAllTier)
+
+	//paymentType
+	r.GET("/paymentType",controller.GetAllPaymentType)	
 
 	r.Run("localhost: " + PORT)
-
 }
 
 
