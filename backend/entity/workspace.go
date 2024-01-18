@@ -4,14 +4,17 @@ import (
 	"time"
 
 	"gorm.io/gorm"
+	
 )
 
 type Workspace struct {
 	gorm.Model
-	WorkspaceName 		string 	`gorm:"uniqueIndex"`
-	Description 		string
-	Image 				string
+	WorkspaceName 		string 	`gorm:"uniqueIndex" valid:"required~WorkspaceName is required"`
+	Description 		string  `gorm:"type:text"`
+    Image               string  `gorm:"type:longtext"`
+	NumberOfProject     int
 	WorkspaceCreatedDate time.Time
+	
 	
 	//fk
 	TeamID 			*uint
@@ -25,4 +28,3 @@ type Workspace struct {
 
 }
 
-	

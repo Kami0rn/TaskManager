@@ -35,7 +35,30 @@ func main() {
 
 	r.DELETE("/users/:id", controller.DeleteUser)
 
+	// WorkspaceRoutes
+	r.GET("/workspaces", controller.ListWorkspace) 
+	r.GET("/workspace/:id", controller.GetWorkspaceByID) 
+	r.POST("/workspaces", controller.CreateWorkspace)
+	r.PATCH("/workspaces/:id", controller.UpdateWorkspace)
+	r.DELETE("/workspaces/:id", controller.DeleteWorkspace)
+	r.GET("/workspace_statuses/:id", controller.GetWorkspaceStatusByID)
+    
+	// ProjectSetting
+	r.GET("/backgrounds", controller.ListBackground) 
+	r.GET("/fonts", controller.ListFont)
+	r.POST("/backgrounds", controller.UploadBackground)
+	r.POST("/createSettings", controller.CreateSetting)
+	r.PATCH("/settings/:projectId", controller.UpdateSetting)
+	r.GET("/background/bySettingID/:id", controller.GetBackgroundBySettingID)
+	r.GET("/font/bySettingID/:id", controller.GetFontBySettingID)
 
+	// Team
+	r.GET("/team/:id", controller.GetTeam)
+	r.GET("/teams", controller.ListTeams)
+	r.POST("/createProjects", controller.CreateProject)
+	r.GET("/getWorkspaceTeamID/:id", controller.ListWorkspaceByTeamID)
+	r.GET("/getProject/:id", controller.GetProject)
+	
 
 	r.Run("localhost: " + PORT)
 

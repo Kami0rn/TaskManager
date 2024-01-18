@@ -1,0 +1,264 @@
+.cards-containerWs1 {
+    display: flex;
+    flex-direction: row; /* ตั้งค่าให้เรียงตามแนวนอน */
+}
+
+.card-syncify {
+    border-radius: 18px;
+    background-color: #676F9D;
+    width: 950px;
+    height:  503px;
+    margin-left: 60px ;
+    
+    margin-top: 113px;
+}
+
+.card-syncifyimage {
+    border-radius: 18px;
+    background-color: #676F9D;
+    width: 520px;
+    height:  626px;
+    margin-left: 50px ;
+    
+    margin-top: 113px;
+}
+
+.cards-containerWs2{
+    margin-left: 60px;
+    gap:0px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* แบ่งเป็น 2 หลัก */
+}
+
+.card-workspace {
+    border-radius: 18px;
+    background-color: #D9D9D9;
+    width: 734px;
+    height:  340px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cards-containerWs3{
+    margin-left: 60px;
+    gap:0px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* แบ่งเป็น 2 หลัก */
+}
+
+.card-Createworkspace {
+    border-radius: 18px;
+    background-color: #505050;
+    width: 734px;
+    height:  340px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center; /* จัดให้อยู่ตรงกลางตามแนวนอน */
+    align-items: center; /* จัดให้อยู่ตรงกลางตามแนวตั้ง */
+}
+
+.create-workspace-button {
+    text-decoration: none;
+    color: #fff;
+    font-family: 'PT Sans', sans-serif;
+    letter-spacing: 2px;
+    font-size: 24px;
+}
+
+.custom-modal {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 566px; 
+    height: 634px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.modal-content {
+    background: #2D2D2D;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 566px;
+    height: 634px;
+    margin-right: 50px;
+    margin-bottom: 100px;
+    display: flex;
+    
+    align-items: flex-end; /* Align buttons to the right */
+  }
+  
+  .button-cancel,
+  .button-create,
+  .button-update,
+  .button-delete{
+    margin-top: 8px; /* Adjust spacing between buttons */
+    padding: 10px 15px; /* Adjust padding for better button size */
+    background-color: #505050;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .button-cancel:hover,
+  .button-create:hover, 
+  .button-update:hover,
+  .button-delete:hover {
+    background-color: #D9D9D9;
+  }
+
+  .menu-item,
+  .menu-open-button{
+    background: #3498db;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+    position: absolute;
+    
+    color: white;
+    text-align: center;
+    line-height: 80px;
+    transform: translate3d(0, 0, 0);
+    transition: transform ease-out 200ms;
+  }
+  
+  .delete-modal {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 566px; 
+    height: 634px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.modalDelete-content {
+    background: #2D2D2D;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 566px;
+    height: 634px;
+    margin-right: 50px;
+    margin-bottom: 100px;
+    display: flex;
+    
+    align-items: flex-end; /* Align buttons to the right */
+  }
+
+  .menu-open {
+    display: none;
+  }
+  
+  .hamburger {
+    width: 25px;
+    height: 3px;
+    background: white;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -12.5px;
+    margin-top: -1.5px;
+    transition: transform 200ms;
+  }
+  
+  .hamburger-1 {
+    transform: translate3d(0, -8px, 0);
+  }
+  
+  .hamburger-2 {
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .hamburger-3 {
+    transform: translate3d(0, 8px, 0);
+  }
+  
+  .menu-open:checked + .menu-open-button .hamburger-1 {
+    transform: translate3d(0, 0, 0) rotate(45deg);
+  }
+  
+  .menu-open:checked + .menu-open-button .hamburger-2 {
+    transform: translate3d(0, 0, 0) scale(0.1, 1);
+  }
+  
+  .menu-open:checked + .menu-open-button .hamburger-3 {
+    transform: translate3d(0, 0, 0) rotate(-45deg);
+  }
+  
+  .menu {
+    position: absolute;
+    left: 50%;
+    margin-left: -80px;
+    padding-top: 20px;
+    padding-left: 80px;
+    /* width: 650px;
+    height: 150px; */
+    box-sizing: border-box;
+    font-size: 20px;
+    text-align: left;
+  }
+  
+  .menu-item:hover {
+    background: white;
+    color: #00bcd4;
+    transition: all .3s;
+  }
+  
+  .menu-item:nth-child(3) {
+    transition-duration: 180ms;
+  }
+  
+  .menu-item:nth-child(4) {
+    transition-duration: 180ms;
+  }
+  
+  .menu-item:nth-child(5) {
+    transition-duration: 180ms;
+  }
+  
+  .menu-item:nth-child(6) {
+    transition-duration: 180ms;
+  }
+  
+  .menu-open-button {
+    z-index: 2;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition-duration: 400ms;
+    transform: scale(1.1, 1.1) translate3d(0, 0, 0);
+    cursor: pointer;
+  }
+  
+  .menu-open-button:hover {
+    transform: scale(1.2, 1.2) translate3d(0, 0, 0);
+  }
+  
+  .menu-open:checked + .menu-open-button {
+    transition-timing-function: linear;
+    transition-duration: 200ms;
+    transform: scale(0.8, 0.8) translate3d(0, 0, 0);
+  }
+  
+  .menu-open:checked ~ .menu-item {
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  
+  .menu-open:checked ~ .menu-item:nth-child(3) {
+    transition-duration: 190ms;
+    transform: translate3d(-110px, 0, 0);
+  }
+  
+  .menu-open:checked ~ .menu-item:nth-child(4) {
+    transition-duration: 290ms;
+    transform: translate3d(-220px, 0, 0);
+  }
+  
+  
+
+
