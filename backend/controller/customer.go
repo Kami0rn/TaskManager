@@ -102,3 +102,25 @@ func GetUserByHash(c *gin.Context) {
 
     c.JSON(http.StatusOK, gin.H{"data": user});
 }
+
+// PATCH /users
+func UpdateUsernameBio(c *gin.Context) {
+	var user entity.User
+	var result entity.User
+
+	if err := c.ShouldBindJSON(&user); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	// ค้นหา user ด้วย id
+	if tx := entity.DB().Where("id = ?", user.ID).First(&result); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
+		return
+	}
+
+	if err := entity.DB().Model(&result).Select("UserName","Bio").Updates(entity.User{UserName: user.UserName, Bio: user.Bio}).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": user})
+}

@@ -1,0 +1,8 @@
+.create-button-page{
+    background-color: #1D2125;
+    margin-top: 60px;
+    height: 91.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

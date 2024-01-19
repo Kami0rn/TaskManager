@@ -19,29 +19,29 @@ color
     Sub: #9aa8b6
     Background: #22272b
 */
+.create-team{
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.createteam-item{
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 550px;
+}
+
 .create-butt{
   text-decoration: none;
   height: 100px;
   color: #000000;
 }
 
-.create-team{
-  padding: 3rem;
-  background-color: #1D2125;
-}
-
-.createteam-item{
-  
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 550px;
-
-}
-
 .team-container{
-  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,6 +70,7 @@ color
   width:100%;
   height: 48px;
   color:#bfcbdb;
+  padding: 0px 10px;
 }
 
 .inputbar1::placeholder{
@@ -77,7 +78,6 @@ color
   width:75%;
   color:#9aa8b6;
 }
-
 
 .team-item h1{
   color: #bfcbdb;
@@ -108,15 +108,25 @@ color
   margin-bottom: 20px;
 }
 
-.image-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.image-text-container{
   height: 100%;
   width: 50%;
   background-color: #e1f1f7;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.text-in-container{
+  padding-top: 5px;
+  margin-left: 96%;
+  height: 5%;
+}
+
+.image-container{
+  display: flex;
+  justify-content: center;
+  padding-top: 10%;;
+  height: 95%;
 }
 
 .image-container img{
@@ -146,7 +156,7 @@ color
     Background: #22272b
 */
 .inviteteam-item{
-  margin-top: 40px;
+  margin-top: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,7 +169,7 @@ color
   justify-content: center;
   align-items: center;
   height: 90%;
-  width: 75%;
+  width: 100%;
   border-style: solid;
   border-width:thin;
   border-color:  #384148;
@@ -198,19 +208,72 @@ color
 }
 
 .inputbar2{
+  overflow-y: auto;
+  max-height: 100px;
   border: 2px solid #384148;
   border-radius: 3px;
   background-color: #22272b;
-  width:100%;
-  height: 48px;
+  max-width: 430px;
+  height: max-content;
   color:#bfcbdb;
+}
+
+.inputbar2:focus{
+  border: 1px solid #006aff;
 }
 
 .inputbar2::placeholder{
   border-radius: 5px;
-  width:75%;
+  width:10%;
   color:#9aa8b6;
 }
+
+.inputbar2 div{
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 8px;
+  margin: 8px 4px;
+  color: #bfcbdb;
+  background-color:#2c3339;
+}
+
+.inputbar2 p{
+  margin-top: -3.5px;
+  margin-left: 3px;
+}
+
+.inputbar2 button{
+  margin-left: 9px;
+  border: transparent;
+  background: none;
+  color:#bfcbdb;
+}
+
+.inputbar2 button:hover{
+  margin-left: 9px;
+  border: transparent;
+  background: none;
+  color:#7ba6e3;
+}
+
+.inputusername{
+  flex-grow: 1;
+  height:48px;
+  padding: 0px 10px;
+  color:#9aa8b6;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+  -webkit-appearance: none;
+}
+
+.inputusername:focus{
+  outline: none;
+  background: none;
+}
+
 
 .listuser{
   margin-bottom: 3px;
@@ -218,6 +281,7 @@ color
 
 .listuser:hover{
   margin-bottom: 3px;
+  background-color: #575757;
 }
 
 .sub-container{
@@ -294,13 +358,13 @@ color
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: red; 
+  background: #9aa8b6; 
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000; 
+  background: #bfcbdb; 
 }
 
 

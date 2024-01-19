@@ -1,0 +1,124 @@
+.profile{
+  background-color: #1D2125;
+  margin-top: 60px;
+  min-height: 91.5vh;
+}
+
+.profile-name-box{
+    display: flex;
+    align-items: center;
+    border-bottom-style: solid;
+    border-bottom-width: thin ;
+    border-bottom-color: #384148;
+    padding: 42px 32px 42px 48px
+}
+
+.profile-name-box .profile-pic{
+    margin-left: 30px;
+    margin-right: 20px;
+}
+
+.profile-name-box .profile-pic img{
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+}
+
+.profile-name{
+    color: #bfcbdb;
+}
+
+.profile-name h3{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.profile-name p{
+    font-size: 12px;
+}
+
+.manage-box{
+    display: flex;
+    justify-content: center;
+
+}
+
+.main-box{
+    width: 100%;
+    max-width: 530px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.main-box img{
+    width: 100%;
+    height: 180px;
+}
+
+.main-box h2{
+    color: #bfcbdb;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.main-box h3{
+    color: #bfcbdb;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 5px 0px;
+    border-bottom-style: solid;
+    border-bottom-width: thin ;
+    border-bottom-color: #384148;
+}
+
+.main-box h4{
+    color: #bfcbdb;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.about-box{
+    margin-top: 10px;
+}
+
+.username-input{
+    margin: 10px 0px;
+    border: 2px solid #384148;
+    border-radius: 3px;
+    background-color: #22272b;
+    width:60%;
+    height: 40px;
+    color:#bfcbdb;
+    padding: 0px 10px;
+}
+  
+.username-input::placeholder{
+    border-radius: 5px;
+    width:75%;
+    color:#9aa8b6;
+}
+
+.bio-input{
+    margin-top: 10px;
+    border: 2px solid #384148;
+    border-radius: 3px;
+    background-color: #22272b;
+    width:60%;
+    min-height: 72px;
+    color:#bfcbdb;
+    resize: vertical;
+    padding: 10px 10px;
+}
+  
+.bio-input::placeholder{
+    border-radius: 5px;
+    width:75%;
+    color:#9aa8b6;
+}
+
+.save-button{
+    margin-top: 10px;
+    height: 30px;
+    width: 175px;
+}

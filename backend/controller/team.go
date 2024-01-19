@@ -3,14 +3,16 @@ package controller
 import (
 	"net/http"
 
+	"time"
+
 	"github.com/Kami0rn/TaskManager/entity"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm/clause"
 )
 
 // POST /teams
 func CreateTeam(c *gin.Context) {
 	var team entity.Team
-	var team_status entity.TeamStatus
 
 	// bind เข้าตัวแปร team
 	if err := c.ShouldBindJSON(&team); err != nil {
@@ -18,16 +20,10 @@ func CreateTeam(c *gin.Context) {
 		return
 	}
 
-	if tx := entity.DB().Where("id = ?", team.TeamStatusID).First(&team_status); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "team_status not found"})
-		return
-	}
-
 	// สร้าง Team
 	newTeam := entity.Team{
 		TeamName:       team.TeamName,
-		TeamCreateDate: team.TeamCreateDate,
-		TeamStatus:     team_status,
+		TeamCreateDate: time.Now(),
 	}
 
 	// บันทึก
@@ -43,7 +39,7 @@ func CreateTeam(c *gin.Context) {
 func GetTeam(c *gin.Context) {
 	var team entity.Team
 	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM teams WHERE id = ?", id).Find(&team).Error; err != nil {
+	if err := entity.DB().Preload("TeamStatus").Raw("SELECT * FROM teams WHERE id = ?", id).Find(&team).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -53,7 +49,7 @@ func GetTeam(c *gin.Context) {
 // GET /teams
 func ListTeams(c *gin.Context) {
 	var teams []entity.Team
-	if err := entity.DB().Raw("SELECT * FROM teams").Find(&teams).Error; err != nil {
+	if err := entity.DB().Preload("TeamStatus").Find(&teams).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -79,6 +75,44 @@ func UpdateTeam(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	
+
 	c.JSON(http.StatusOK, gin.H{"data": team})
+}
+
+func UpdateNumberOfTeammate(c *gin.Context) {
+	var team entity.Team
+	var result entity.Team
+
+	if err := c.ShouldBindJSON(&team); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	// ค้นหา team ด้วย id
+	if tx := entity.DB().Where("id = ?", team.ID).First(&result); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "team not found"})
+		return
+	}
+
+	result.NumberOfTeammate++
+
+	if err := entity.DB().Model(&result).Update("NumberOfTeammate", result.NumberOfTeammate).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": team})
+}
+
+// DELETE /team/:id
+func DeleteTeam(c *gin.Context) {
+    var team entity.Team
+    id := c.Param("id")
+
+    if rows := entity.DB().Clauses(clause.Returning{}).Delete(&team, id).RowsAffected; rows == 0 {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "team not found"})
+        return
+    }
+
+    // response deleted data
+    c.JSON(http.StatusOK, gin.H{"data": "cancel your team successfully"})
 }

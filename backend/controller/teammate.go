@@ -5,6 +5,7 @@ import (
 
 	"github.com/Kami0rn/TaskManager/entity"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm/clause"
 )
 
 // POST /leaders
@@ -98,19 +99,19 @@ func CreateTeammate(c *gin.Context) {
 
 // GET /teammate/:id
 func GetTeammate(c *gin.Context) {
-	var teammate entity.Teammate
-	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM teammates WHERE id = ?", id).Find(&teammate).Error; err != nil {
+	var teammates entity.Teammate
+	// id := c.Param("id")
+	if err := entity.DB().Raw("SELECT * FROM teammates WHERE team_id = ?", 1).Find(&teammates).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": teammate})
+	c.JSON(http.StatusOK, gin.H{"data": teammates})
 }
 
 // GET /teammates
 func ListTeammates(c *gin.Context) {
 	var teammates []entity.Teammate
-	if err := entity.DB().Raw("SELECT * FROM teammates").Find(&teammates).Error; err != nil {
+	if err := entity.DB().Preload("User").Preload("Team").Preload("Role").Find(&teammates).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -118,11 +119,25 @@ func ListTeammates(c *gin.Context) {
 }
 
 func GetUserFromTeamID(c *gin.Context) {
-	var teammates entity.Teammate
+	var teammates []entity.Teammate
 	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM teammates WHERE id = ?", id).Find(&teammates).Error; err != nil {
+	if err := entity.DB().Preload("User").Preload("Team").Preload("Role").Raw("SELECT * FROM teammates WHERE team_id = ? AND deleted_at IS NULL", id).Find(&teammates).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"data": teammates})
 }
+
+func DeleteSelectedTeammate(c *gin.Context) {
+    var teammate entity.Teammate
+	id := c.Param("id")
+
+    if rows := entity.DB().Clauses(clause.Returning{}).Delete(&teammate, id).RowsAffected; rows == 0 {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "team not found"})
+        return
+    }
+
+    // response deleted data
+    c.JSON(http.StatusOK, gin.H{"data": "cancel your team successfully"})
+}
+

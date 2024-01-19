@@ -30,6 +30,8 @@ func main() {
 
 	r.PATCH("/users", controller.UpdateUser)
 
+	r.PATCH("/user", controller.UpdateUsernameBio)
+
 	r.DELETE("/users/:id", controller.DeleteUser)
 
 	r.GET("/roles", controller.ListRoles)
@@ -44,15 +46,23 @@ func main() {
 
 	r.PATCH("/teams", controller.UpdateTeam)
 
+	r.PATCH("/numberofteammate", controller.UpdateNumberOfTeammate)
+
+	r.GET("/team/:id", controller.GetTeam)
+
 	r.GET("/teams", controller.ListTeams)
+
+	r.DELETE("/team/:id", controller.DeleteTeam)
 
 	r.GET("/teammates", controller.ListTeammates)
 
 	r.GET("/teammates/team/:id", controller.GetUserFromTeamID)
 
-	r.GET("/teammate/:id", controller.GetTeammate)
+	r.GET("/teammate", controller.GetTeammate)
 
 	r.POST("/teammates", controller.CreateTeammate)
+
+	r.DELETE("/teammate/:id", controller.DeleteSelectedTeammate)
 
 	r.POST("/leaders", controller.CreateLeader)
 
