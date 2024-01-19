@@ -2,7 +2,7 @@ package controller
 
 import (
 	"net/http"
-
+	"github.com/asaskevich/govalidator"
 	"github.com/Kami0rn/TaskManager/entity"
 	"github.com/gin-gonic/gin"
 )
@@ -15,6 +15,12 @@ func CreatePayment(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	//validate
+	if _, err := govalidator.ValidateStruct(payment); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	
 	if err := entity.DB().Create(&payment).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -45,7 +51,7 @@ func GetPaymentByPaymentID(c *gin.Context) {
 }
 
 // DELETE /payment/:paymentID
-func DeletePayment(c *gin.Context) {
+func DeletePaymentByPaymentID(c *gin.Context) {
 	paymentID := c.Param("paymentID")
 	if tx := entity.DB().Exec("DELETE FROM payments WHERE id = ?", paymentID); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
@@ -58,7 +64,6 @@ func DeletePayment(c *gin.Context) {
 func UpdatePayment(c *gin.Context) {
 	var payment entity.Payment
 	var result entity.Payment
-
 	if err := c.ShouldBindJSON(&payment); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -71,6 +76,5 @@ func UpdatePayment(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	
 	c.JSON(http.StatusOK, gin.H{"data": payment})
 }

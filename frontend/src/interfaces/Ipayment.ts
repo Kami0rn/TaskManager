@@ -4,7 +4,7 @@ import {UserInterface} from "./Iuser";
 
 export interface PaymentInterface {
     ID?:            number;
-    PaymentDate:   Date 
+    PaymentDate:    Date;
     TotalPrice?:    number;
     Note?:          string;
     MoneySlip?:     string;

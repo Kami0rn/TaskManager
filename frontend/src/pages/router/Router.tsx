@@ -10,6 +10,7 @@ const Router = () =>  {
         <Link id='login' to='/register' className="Link"><button className="btn btn-outline">Register</button></Link>
         <Link id='login' to='/payment' className="Link"><button className="btn btn-outline">payment</button></Link>
         <Link id='login' to='/paymentHistory' className="Link"><button className="btn btn-outline">paymentHistory</button></Link>
+        <Link id='login' to='/comment' className="Link"><button className="btn btn-outline">Comment</button></Link>
 
     </div>
   )

@@ -10,7 +10,10 @@ import { PaymentTypeInterface } from "../../interfaces/IpaymentType";
 //methods
 import { DeleteUserByID, GetUserById } from "../../services/http/user/user";
 import { GetTier } from "../../services/http/tier/tier";
-import { DeletePaymentByID, GetPaymentByUserID } from "../../services/http/payment/payment";
+import {
+  DeletePaymentByID,
+  GetPaymentByUserID,
+} from "../../services/http/payment/payment";
 
 //components
 import Nav from "../../etc/Nav";
@@ -29,9 +32,9 @@ function PaymentHistory() {
   const [Tier, setTier] = useState<TierInterface[]>([]);
   const [User, setUser] = useState<UserInterface>();
   const [Payment, setPayment] = useState<PaymentInterface[]>([]);
-  
+
   //modal
-  
+
   const [openModal, setOpenModal] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState<String>();
@@ -43,24 +46,22 @@ function PaymentHistory() {
   const handleClickOpenMOdal = () => {
     setOpenModal(true);
   };
-  
+
   const handleCancel = () => {
     setOpenModal(false);
   };
-  const handleButtonPaymentType = () => {
-    setOpenModal(false);
-  };
+  
   const showModal = (val: Number | undefined) => {
     setModalText(`คุณต้องการลบข้อมูลหรือไม่ ?`);
     setDeletePaymentID(val);
-    console.log(deletePaymentID)
+    console.log(deletePaymentID);
     setOpenModal(true);
   };
 
   //handle
   const handleDelete = async () => {
     let res = await DeletePaymentByID(deletePaymentID);
-    console.log(res)
+    console.log(res);
     if (!res.status) {
       setOpenModal(false);
       messageApi.open({
@@ -79,11 +80,10 @@ function PaymentHistory() {
     }
     setConfirmLoading(false);
   };
+
   const handleEdit = async (id: number | undefined) => {
     navigate(`/paymentHistory/edit/${id}`);
   };
-
-  
 
   //get ค่า
   const getPaymentByUserID = async (userID: number) => {
@@ -93,9 +93,6 @@ function PaymentHistory() {
       console.log(res);
     }
   };
-
-  
-
 
   useEffect(() => {
     getPaymentByUserID(1);
@@ -134,7 +131,6 @@ function PaymentHistory() {
                   </thead>
                   <tbody className="">
                     {Payment.map((data, index) => (
-                      
                       <tr key={index} className="">
                         <td className="text-center">{index + 1}</td>
                         <td className="text-center">
@@ -143,7 +139,8 @@ function PaymentHistory() {
                         <td className="text-center">{data.TotalPrice}</td>
                         <td className="text-center">{data.Note}</td>
                         <td className="flex justify-center">
-                          <img className="w-24 h-24"
+                          <img
+                            className="w-24 h-24"
                             src={data.MoneySlip}
                             alt=""
                           />
@@ -152,26 +149,22 @@ function PaymentHistory() {
                           {data.PaymentType?.PaymentType}
                         </td>
 
-                        
                         <td className="">
                           <div className="flex space-x-1 justify-center">
-                          <button
-                            className="btn btn-outline btn-warning btn-sm"
-                            onClick={() => handleEdit(data.ID)}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            className="btn btn-outline btn-error btn-sm"
-                            onClick={() => showModal(data.ID)}
-                          >
-                            Delete
-                          </button>
+                            <button
+                              className="btn btn-outline btn-warning btn-sm"
+                              onClick={() => handleEdit(data.ID)}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="btn btn-outline btn-error btn-sm"
+                              onClick={() => showModal(data.ID)}
+                            >
+                              Delete
+                            </button>
                           </div>
-                          
                         </td>
-                        
-                        
                       </tr>
                     ))}
                   </tbody>
@@ -180,20 +173,21 @@ function PaymentHistory() {
             </div>
           </div>
           <Modal
-        title="ลบข้อมูล ?"
-        centered
-        open={openModal}
-        onOk={handleDelete}
-        onCancel={handleCancel}
-        confirmLoading={confirmLoading}
-        footer={(_, { OkBtn, CancelBtn }) => 
-        <>
-        <CancelBtn />
-        <OkBtn />
-        </>}
-      >
-        {modalText}
-        </Modal>
+            title="ลบข้อมูล ?"
+            centered
+            open={openModal}
+            onOk={handleDelete}
+            onCancel={handleCancel}
+            confirmLoading={confirmLoading}
+            footer={(_, { OkBtn, CancelBtn }) => (
+              <>
+                <CancelBtn />
+                <OkBtn />
+              </>
+            )}
+          >
+            {modalText}
+          </Modal>
         </Content>
       </Layout>
     </>

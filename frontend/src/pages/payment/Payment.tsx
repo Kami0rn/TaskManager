@@ -1,5 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./payment.css";
 //interface
 import { TierInterface } from "../../interfaces/Itier";
@@ -10,17 +9,12 @@ import { PaymentTypeInterface } from "../../interfaces/IpaymentType";
 import { GetUserById } from "../../services/http/user/user";
 import { GetTier } from "../../services/http/tier/tier";
 import { GetPaymentType } from "../../services/http/paymentType/paymentType";
-
+import { CreatePayment } from "../../services/http/payment/payment";
 //ant
 import { Card, Form, Layout, message } from "antd";
 import Modal from "antd/es/modal/Modal";
-import { CreatePayment } from "../../services/http/payment/payment";
 
-//context
-export const tierContext = createContext<TierInterface[]>([]);
 
-export const PaymentContext = createContext<PaymentInterface[]>([]);
-export const UserContext = React.createContext(0);
 
 const { Header, Content } = Layout;
 

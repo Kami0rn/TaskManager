@@ -8,10 +8,10 @@ import (
 
 type Payment struct {	
 	gorm.Model
-	PaymentDate		time.Time    // time.Time
-	TotalPrice 		int64
-	Note 			string
-	MoneySlip		string
+	PaymentDate		time.Time    `valid:"required~Date is required"` //before_tomorrow~Date must be until today
+	TotalPrice 		int64		 `valid:"required~TotalPrice is required,"`
+	Note 			string		 `valid:"required~Note is required, stringlength(1|500)"`
+	MoneySlip		string		 `valid:"required~MoneySlip is required"`
 	//FK
 	UserID 			*uint	
 	User   			User 			`gorm:"foreignKey:UserID"`

@@ -31,8 +31,6 @@ function EditPaymentHistory() {
   const [newData, setNewData] = React.useState<Partial<PaymentInterface>>({});
 
   //handle
-  const handleOk = async (id: number) => {};
-
   const handleCan = async () => {
     navigate(`/paymentHistory`);
   };
