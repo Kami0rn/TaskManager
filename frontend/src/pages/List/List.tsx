@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { GetListByProjectId } from "../../services/http/list/list";
 import { ListInterface } from "../../interfaces/Ilist";
 import CreateList from "./CreateList";
+import CreateCardComponent from "../Card/CreateCardComponent"
 import "./List.css";
 
 function List() {
@@ -9,10 +10,20 @@ function List() {
     setShowCreateList(true);
   };
   const handleCreateListClose = () => {
-    setShowCreateList(false);
+    setShowCreateList(false); 
+  };
+
+const handleCreateCardClick = (listID: number) => () => {
+  setShowCreateCard(true);
+  localStorage.setItem("listID", listID.toString());
+};
+
+  const handleCreateCardClose = () => {
+    setShowCreateCard(false); 
   };
   const [lists, setLists] = useState<ListInterface[]>([]);
   const [showCreateList, setShowCreateList] = useState(false);
+  const [showCreateCard, setShowCreateCard] = useState(false);
 
   useEffect(() => {
     async function fetchListData() {
@@ -46,7 +57,7 @@ function List() {
                   </li>
                 ))}
             </ul>
-            <button className="bg-slate-500 w-11/12 flex my-3 mx-2 rounded-md">
+            <button className="bg-slate-500 w-11/12 flex my-3 mx-2 rounded-md" onClick={handleCreateCardClick(list.ID)}>
               <div>+ Add new card</div>
             </button>
           </li>
@@ -62,6 +73,16 @@ function List() {
               &times;
             </span>
             <CreateList />
+          </div>
+        </div>
+      )}
+            {showCreateCard && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={handleCreateCardClose}>
+              &times;
+            </span>
+            <CreateCardComponent />
           </div>
         </div>
       )}

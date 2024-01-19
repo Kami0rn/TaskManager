@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css"; // Import SweetAlert2 CSS
-import "./CreateList.css";
+// import "./CreateCard.css" ;
 
 function CreateList() {
   const navigate = useNavigate();

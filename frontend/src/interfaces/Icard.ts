@@ -1,6 +1,6 @@
 export interface CardInterface {    
 
-    ID: number;
+    ID?: number;
     CardName?: string;
     CardDescription?: string
     CreateCard?: string | Date;
