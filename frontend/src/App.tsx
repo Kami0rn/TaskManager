@@ -7,6 +7,7 @@ import Router from './pages/router/Router'
 import Login from './pages/login/Login';
 import Dashboard from './pages/dashboard/dashboard';
 import ProjectPage from './pages/ProjectPage/ProjectPage';
+import MyProject from './pages/myProject/myProject';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='/router' element={<Router />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/projectPage' element={<ProjectPage />} />
+          <Route path='/myProject' element={<MyProject />} />
         </Routes>
 
         

@@ -63,3 +63,9 @@ async function CreateProjectHistory(data: ProjectHistoryInterface) {
     return res;
   
   }
+
+  export {
+    CreateProjectHistory,
+    UpdateProjectHistory,
+    ListRecentProjectByUserID,
+  }

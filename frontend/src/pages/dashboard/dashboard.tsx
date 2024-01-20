@@ -6,12 +6,16 @@ import { Button, message } from 'antd';
 import "./dashboard.css"
 import "./CardSlider.css"
 import CardSlider from './CardSlider';
+import { ListRecentProjectByUserID } from '../../services/http/projectHistory/projectHistory';
+import { useNavigate } from 'react-router-dom';
 
 
 const Dashboard = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [projectData, setProjectData] = useState<ProjectInterface[]>([]);
     const [archivedProjectData, setArchivedProjectData] = useState<ProjectInterface[]>([]);
+    const [recentProjectData, setRecentProjectData] = useState<ProjectInterface[]>([]);
+    const navigate = useNavigate();
 
     const HandleProjectListing = async () => {
 
@@ -43,9 +47,24 @@ const Dashboard = () => {
             console.log(res);
         }
     }
+    const HandleListRecentProject = async (userID:number) => {
+        let res = await ListRecentProjectByUserID(userID);
+
+        if (res) {
+            console.log("Listed recent projects");
+            console.log(res);
+            setRecentProjectData(res);
+        }
+        else {
+            console.log("cannot list recent project");
+            console.log(res);
+        }
+    }
 
     useEffect(() => {
         HandleProjectListing();
+        // Must receive userID from local storage
+        HandleListRecentProject(1);
     }, [])
 
     return (
@@ -57,13 +76,13 @@ const Dashboard = () => {
                 {contextHolder}
                 <div>
                     <h1>Recent</h1>
-                    <CardSlider projectData={projectData} />
+                    <CardSlider projectData={recentProjectData} isRecent={true} />
                 </div>
                 <div>
                     <h1>Projects in this workspace</h1>
-                    <CardSlider projectData={projectData} />
+                    <CardSlider projectData={projectData} isRecent={false}/>
                 </div>
-                <Button onClick={() => HandleListArchivedProject()}>Achived projects</Button>
+                <Button onClick={() => navigate(`/myProject`)}>My project</Button>
 
             </div>
         </div>

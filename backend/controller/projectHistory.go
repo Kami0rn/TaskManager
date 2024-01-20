@@ -29,12 +29,11 @@ func CreateProjectHistory(c *gin.Context) {
 		return
 	}
 
-
 	// สร้าง Project
 	newProjectHisory := entity.ProjectHistory{
 		RecentlyUse: projectHisory.RecentlyUse,
-		Project: project,
-		User: user,
+		Project:     project,
+		User:        user,
 	}
 
 	// บันทึก
@@ -49,17 +48,18 @@ func CreateProjectHistory(c *gin.Context) {
 // PATCH /updateProjectHistory
 func UpdateProjectHistory(c *gin.Context) {
 	var projectHisory entity.ProjectHistory
-	var result entity.Project
-
+	var id uint
 	if err := c.ShouldBindJSON(&projectHisory); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	// find projectHistory by id
-	if tx := entity.DB().Where("id = ?", projectHisory.ID).First(&result); tx.RowsAffected == 0 {
+	if err := entity.DB().Raw("SELECT id FROM project_histories WHERE project_id = ?", projectHisory.ProjectID).First(&id).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "project not found"})
 		return
 	}
+
+	projectHisory.ID = id
 
 	if err := entity.DB().Save(&projectHisory).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -72,7 +72,7 @@ func UpdateProjectHistory(c *gin.Context) {
 func ListRecentProjectByUserID(c *gin.Context) {
 	var recentProject []entity.Project
 	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT p.* FROM projects p INNER JOIN project_histories h ON p.id = h.project_id WHERE p.deleted_at is NULL AND p.project_status_id = 1 AND h.user_id = ?", id).Find(&recentProject).Error; err != nil {
+	if err := entity.DB().Raw("SELECT p.* FROM projects p INNER JOIN project_histories h ON p.id = h.project_id WHERE p.deleted_at is NULL AND p.project_status_id = 1 AND h.user_id = ? ORDER BY h.recently_use DESC LIMIT 4", id).Find(&recentProject).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

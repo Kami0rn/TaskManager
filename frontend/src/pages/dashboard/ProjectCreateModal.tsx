@@ -7,6 +7,8 @@ import { CreateProject } from '../../services/http/project/project';
 import { useNavigate } from 'react-router-dom';
 import { ListWorkspaceByTeamID } from '../../services/http/workspace/workspace';
 import { WorkspaceInterface } from '../../interfaces/IWorkspace';
+import { ProjectHistoryInterface } from '../../interfaces/IProjectHistory';
+import { CreateProjectHistory } from '../../services/http/projectHistory/projectHistory';
 
 const { DateTime } = require("luxon");
 
@@ -44,6 +46,30 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
       onClose();
   };
 
+  const HandleProjectHistoryCreate = async (projectID:number, userID:number) => {
+    console.log("projectDataaaaa");
+    console.log(projectData);
+    let history:ProjectHistoryInterface = {
+      RecentlyUse: DateTime.now(),
+      ProjectID: projectID,
+      UserID: userID,
+    }
+
+    let res = await CreateProjectHistory(history);
+
+    if (res.status) {
+      console.log("Created history"); 
+      console.log(res); 
+      setTimeout(() => {
+        if (projectData) navigate(`/projectPage`, {state: {projectID:projectData.ID},});
+      }, 1000)
+    }
+    else {
+      console.log("cannot create history");
+      console.log(res);
+    }
+  }
+
   // Might be hard code
   const HandleProjectCreation = async (value: ProjectInterface) => {
     value.ProjectCreatedDate = DateTime.now();
@@ -51,20 +77,20 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
     value.ProjectSettingID = 1;
     value.ProjectStatusID = 1;
     console.log(value);
-
     let res = await CreateProject(value)
     if (res.status) {
       messageApi.open({
         type: "success",
         content: "Create successful"
       })
-      console.log(projectData);
-      console.log(res);
+      setProjectData(res.message);
+      // console.log("res.message");
+      // console.log(res.message);
       setTimeout(() => {
         form.resetFields();
         onClose();
-        //navigate(`/projectPage`);
-      }, 3000)
+      }, 1000)
+      
     }
     else {
       messageApi.open({
@@ -75,6 +101,11 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
       console.log(res);
     }
   }
+
+  useEffect(() => {
+    if(projectData?.ID !== undefined)
+        {HandleProjectHistoryCreate(projectData?.ID, 1);}
+  },[projectData])
 
   if (!visible) return null;
   return (

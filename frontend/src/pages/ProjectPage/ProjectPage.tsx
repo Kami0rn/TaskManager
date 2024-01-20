@@ -6,6 +6,8 @@ import { ProjectInterface } from '../../interfaces/IProject';
 import { Button } from 'antd';
 import { ProjectEditModal } from './EditModal';
 import { GetProjectById, UpdateProject } from '../../services/http/project/project';
+import { ProjectHistoryInterface } from '../../interfaces/IProjectHistory';
+import { UpdateProjectHistory } from '../../services/http/projectHistory/projectHistory';
 
 const { DateTime } = require("luxon");
 
@@ -87,11 +89,36 @@ const ProjectPage = () => {
         }
     }
 
+    const UpdateHistory = async (projectID: number) => {
+        console.log(projectID);
+        // GetProjectByID(projectID);
+
+        let history:ProjectHistoryInterface = {
+            RecentlyUse: DateTime.now(),
+            ProjectID: projectID,
+            //Must receive from local storage
+            UserID: 1,
+          }
+        
+        let res = await UpdateProjectHistory(history);
+
+        if (res.status) {
+            console.log("Updated history");
+            console.log(res);
+        }
+        else {
+            console.log("Cannot upadate history");
+            console.log(res);
+        }
+    }
 
     useEffect(() => {
         GetProjectByID(locationState.projectID);
     }, [showProjectEditModal])
 
+    useEffect(() => {
+        UpdateHistory(locationState.projectID)
+    }, [])
 
     return (
         <div className='flex flex-wrap w-full h-full pt-20'>
