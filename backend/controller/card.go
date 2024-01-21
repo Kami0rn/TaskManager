@@ -53,7 +53,7 @@ func CreateCard(c *gin.Context) {
 	// c.JSON(http.StatusOK, gin.H{"data": newCard})
 
 	// Return the created card in the response
-	c.JSON(http.StatusCreated, gin.H{"message": "Card created successfully", "card": card})
+	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Card created successfully", "card": card, "data": newCard})
 }
 
 

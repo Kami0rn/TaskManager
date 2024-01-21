@@ -1,0 +1,4 @@
+.swal-container {
+    z-index: 9999; /* Set a higher z-index value */
+  }
+  

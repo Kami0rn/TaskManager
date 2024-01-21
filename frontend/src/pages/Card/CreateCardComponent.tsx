@@ -5,6 +5,7 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import { CreateCard } from "../../services/http/card/card";
 import { CardInterface } from "../../interfaces/Icard";
 
+
 interface ApiResponse {
   status: string;
   message: any;
@@ -43,12 +44,13 @@ const CreateCardComponent: React.FC = () => {
 
       if (response.status === "ok") {
         console.log("Card created successfully:", response);
+        
 
         Swal.fire({
           html: `<i>${response.message}</i>`,
           icon: "success",
           customClass: {
-            container: "swal-container",
+            container: "swal-container z-50",
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -56,6 +58,7 @@ const CreateCardComponent: React.FC = () => {
             window.location.reload();
           }
         });
+        
       } else {
         console.error("Error creating card. Status:", response.status);
       }
