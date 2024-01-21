@@ -11,8 +11,6 @@ import (
 func CreateProject(c *gin.Context) {
 	var project entity.Project
 	var workspace entity.Workspace
-	var projectSetting entity.ProjectSetting
-	var projectStatus entity.ProjectStatus
 
 	// bind into project
 	if err := c.ShouldBindJSON(&project); err != nil {
@@ -25,24 +23,12 @@ func CreateProject(c *gin.Context) {
 		return
 	}
 
-	if tx := entity.DB().Where("id = ?", project.ProjectSettingID).First(&projectSetting); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "projectSetting not found"})
-		return
-	}
-
-	if tx := entity.DB().Where("id = ?", project.ProjectStatusID).First(&projectStatus); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "projectStatus not found"})
-		return
-	}
-
-
 	// สร้าง Project
 	newProject := entity.Project{
-		ProjectName: project.ProjectName,
+		ProjectName:        project.ProjectName,
 		ProjectCreatedDate: project.ProjectCreatedDate,
-		Workspace: workspace,
-		ProjectSetting: projectSetting,
-		ProjectStatus: projectStatus,
+		ProjectDetail:      project.ProjectDetail,
+		Workspace:          workspace,
 	}
 
 	// บันทึก

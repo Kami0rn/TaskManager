@@ -6,4 +6,5 @@ export interface ProjectInterface {
     ProjectSettingID?: number;
     ProjectStatusID?: number;
     DeletedAt? : Date;
+    ProjectDetail?: string;
 }

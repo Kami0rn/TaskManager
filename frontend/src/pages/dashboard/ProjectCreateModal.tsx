@@ -61,8 +61,8 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
       console.log("Created history"); 
       console.log(res); 
       setTimeout(() => {
-        if (projectData) navigate(`/projectPage`, {state: {projectID:projectData.ID},});
-      }, 1000)
+        // if (projectData) navigate(`/projectPage`, {state: {projectID:projectData.ID},});
+      }, 10000)
     }
     else {
       console.log("cannot create history");
@@ -89,7 +89,7 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
       setTimeout(() => {
         form.resetFields();
         onClose();
-      }, 1000)
+      }, 10000)
       
     }
     else {
@@ -113,7 +113,7 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
       onClick={handleOnclose}
       className='fixed inset-0 mt-20 mr-5 bg-opacity-30 flex items-start justify-end z-50' >
       {contextHolder}
-      <div  className="flex flex-col bg-[#2d2d2d] p-2 rounded h-[295px] w-[366px] shadow-md text-white">
+      <div  className="flex flex-col bg-[#2d2d2d] p-2 rounded w-[400px] shadow-md text-white">
         <h1 className='place-self-center'>Create project</h1>
         <ConfigProvider
           theme={{
@@ -125,8 +125,18 @@ export const ProjectCreateModal = ({ visible, onClose }: { visible: boolean, onC
           }}
         >
           <Form form={form} layout='vertical' onFinish={HandleProjectCreation}>
-            <Form.Item name="ProjectName" label='Project name' rules={[{ required: true, message: 'Project name is required!' }]}>
-              <Input />
+            <Form.Item name="ProjectName" label='Project name' 
+            rules={[{ required: true, message: 'Project name is required!' }, 
+            { min: 3,max: 50, message: 'Project name must be 3-50 characters!' },
+            {
+              pattern: /^[a-zA-Z0-9 ]*$/,
+              message: 'Project name must not contain special characters!',
+            },]}>
+              <Input placeholder='3-50 characters, not contains special characters'/>
+            </Form.Item>
+            <Form.Item name="ProjectDetail" label='Detail' 
+            rules={[{max: 100, message: 'Project name must not be more than 100 characters!' },]}>
+              <Input placeholder='max 100 charaters'/>
             </Form.Item>
             <Form.Item name="WorkspaceID" label='Workspace' rules={[{ required: true, message: 'Please select workspace!' }]}>
               <Select>
