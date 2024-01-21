@@ -30,10 +30,7 @@ func CreateList(c *gin.Context) {
         c.JSON(http.StatusBadRequest, gin.H{"error": "project not found"})
         return
     }
-    if _,err := govalidator.ValidateStruct(list); err != nil {
-        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-        return
-    }
+
     // Create List
     newList := entity.List{
         ListName:        list.ListName,
@@ -42,11 +39,16 @@ func CreateList(c *gin.Context) {
         Project:         project,
     }
 
+    if _,err := govalidator.ValidateStruct(list); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
     // Save to database
     if err := entity.DB().Create(&newList).Error; err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
+    
 
     c.JSON(http.StatusOK, gin.H{"data": newList})
 }

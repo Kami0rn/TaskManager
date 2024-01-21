@@ -7,19 +7,15 @@ import (
 )
 
 type List struct {
-
 	gorm.Model
-	ListName 		string `gorm:"uniqueIndex" valid:"required~กรุณากรอกชื่อ List !"`
-	ListDescription string
-	Process 		float32
-	ListCrateDate	time.Time
-	//FK
-	ProjectID 		*uint
-	Project   		Project	`gorm:"foreignKey:ProjectID"`
-
-	//give FK
-	Cards 			[]Card `gorm:"foreignKey:ListID"`
-
+	ListName        string `gorm:"uniqueIndex" valid:"required~Please fill ListName"`
+	ListDescription string `valid:"required~Please fill description"`
+	Process         float32 
+	ListCrateDate   time.Time
+	ProjectID       *uint
+	Project         Project `gorm:"foreignKey:ProjectID"`
+	Cards           []Card  `gorm:"foreignKey:ListID"`
 }
 
-	
+// Validate validates the List struct using the validate package.
+

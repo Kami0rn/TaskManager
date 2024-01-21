@@ -44,6 +44,7 @@ func CreateCard(c *gin.Context) {
         ListID:         card.ListID,
     }
 
+	
     // Save to database
 	if err := entity.DB().Create(&newCard).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
