@@ -50,14 +50,19 @@ const CreateCardComponent: React.FC = () => {
           html: `<i>${response.message}</i>`,
           icon: "success",
           customClass: {
-            container: "swal-container z-50",
+            container: "swal-container z-10",
           },
-        }).then((result) => {
-          if (result.isConfirmed) {
-            // Refresh the page if the status is OK
-            window.location.reload();
-          }
+          didClose: () => {
+            // Check if the status is "ok"
+            if (response.status === "ok") {
+              // Perform actions you want after the modal is closed and status is "ok"
+              window.location.reload(); // Example: Refresh the page
+            }
+          },
         });
+        
+        
+        
         
       } else {
         console.error("Error creating card. Status:", response.status);

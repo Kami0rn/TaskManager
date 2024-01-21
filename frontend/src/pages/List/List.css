@@ -8,7 +8,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Set a high z-index value to ensure it appears above other elements */
+    position: fixed;
+    z-index: 1000; /* Set a high z-index value to ensure it appears above other elements */
   }
   
   .modal-content {
@@ -16,7 +17,7 @@
     padding: 20px;
     border-radius: 5px;
     position: relative;
-    z-index: 10000; /* Make sure the content has a higher z-index than the background */
+    z-index: 12000; /* Make sure the content has a higher z-index than the background */
   }
   
   .close {
@@ -27,4 +28,10 @@
     cursor: pointer;
     color: #000; /* Make sure the color is contrasting with the background */
   }
+
+  
+  .modal-backdrop {
+    z-index: 900;
+  }
+  
   
