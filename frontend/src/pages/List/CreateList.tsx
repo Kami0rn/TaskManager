@@ -90,6 +90,8 @@ function CreateList() {
     } catch (error) {
       console.error("Error creating list:", error);
     }
+
+    
   };
 
   return (

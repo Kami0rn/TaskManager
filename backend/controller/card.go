@@ -75,5 +75,5 @@ func GetCardFromListID(c *gin.Context) {
 	// Fetch all lists related to the specific project ID
 	db.Where("list_id = ?", listID).Find(&cards)
 
-	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Cards Read Success", "lists": cards})
+	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Cards Read Success", "cards": cards})
 }

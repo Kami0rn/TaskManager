@@ -18,6 +18,9 @@
       const data = await response.json();
 
       if (data.cards) {
+        console.log("Hello")
+        console.log("data.cards")
+        console.log(data);
         return data;
       } else {
         return false;
