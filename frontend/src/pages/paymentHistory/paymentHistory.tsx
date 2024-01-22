@@ -50,7 +50,7 @@ function PaymentHistory() {
   const handleCancel = () => {
     setOpenModal(false);
   };
-  
+
   const showModal = (val: Number | undefined) => {
     setModalText(`คุณต้องการลบข้อมูลหรือไม่ ?`);
     setDeletePaymentID(val);
@@ -115,32 +115,50 @@ function PaymentHistory() {
           <div className="content_paymentHistory">
             <div className="Header-in_content_paymentHistory"></div>
             <div className="content-in_content_paymentHistory">
-              <div style={{ marginTop: 20 }}>
+              <div className="flex  w-full h-full mt-2  items-center justify-center border-solid border-2 border-slat-300 rounded-md ">
                 {/* table */}
-                <table cellSpacing={0} className="table">
+                <table cellSpacing={0} className="table flex">
                   <thead>
                     <tr>
-                      <th className="text-center">ลำดับ</th>
-                      <th className="text-center">PaymentDate</th>
-                      <th className="text-center">TotalPrice</th>
-                      <th className="text-center">Note</th>
-                      <th className="text-center">MoneySlip</th>
-                      <th className="text-center">PaymentType</th>
-                      <th className="text-center">จัดการ</th>
+                      <th className="text-center text-slate-900 font-bold">
+                        ลำดับ
+                      </th>
+                      <th className="text-center text-slate-900 font-bold">
+                        PaymentDate
+                      </th>
+                      <th className="text-center text-slate-900 font-bold">
+                        TotalPrice
+                      </th>
+                      <th className="text-center text-slate-900 font-bold">
+                        Note
+                      </th>
+                      <th className="text-center text-slate-900 font-bold">
+                        MoneySlip
+                      </th>
+                      <th className="text-center text-slate-900 font-bold">
+                        PaymentType
+                      </th>
+                      <th className="text-center text-slate-900 font-bold">
+                        จัดการ
+                      </th>
                     </tr>
                   </thead>
+                  <hr></hr>
                   <tbody className="">
                     {Payment.map((data, index) => (
-                      <tr key={index} className="">
+                      <tr
+                        key={index}
+                        className="hover:bg-slate-200"
+                      >
                         <td className="text-center">{index + 1}</td>
                         <td className="text-center">
                           {data.PaymentDate.toString()}
                         </td>
                         <td className="text-center">{data.TotalPrice}</td>
                         <td className="text-center">{data.Note}</td>
-                        <td className="flex justify-center">
+                        <td className="flex justify-center ">
                           <img
-                            className="w-24 h-24"
+                            className="w-24 h-24 rounded-lg"
                             src={data.MoneySlip}
                             alt=""
                           />

@@ -59,7 +59,6 @@ async function CreatePayment(data: PaymentInterface) {
         return { status: false, message: res.error };
       }
     });
-
   return res;
 }
 async function DeletePaymentByID(id: Number | undefined) {
