@@ -8,10 +8,10 @@ import (
 
 type Payment struct {	
 	gorm.Model
-	PaymentDate		time.Time    // time.Time
-	TotalPrice 		int64
-	Note 			string
-	MoneySlip		string
+	PaymentDate		time.Time    `valid:"required~PaymentDate is required"`
+	TotalPrice 		int64		 `valid:"required~TotalPrice is required,numeric~TotalPrice must be greater than 0"`
+	Note 			string		 `valid:"stringlength(0|500)~Noteไม่ควรเกิน 500 ตัวอักษร"`
+	MoneySlip		string		 `valid:"required~โปรดกรุณาใส่รูปสลิป"`
 	//FK
 	UserID 			*uint	
 	User   			User 			`gorm:"foreignKey:UserID"`
@@ -19,7 +19,7 @@ type Payment struct {
 	PaymentStatusID *uint
 	PaymentStatus   PaymentStatus 	`gorm:"foreignKey:PaymentStatusID"`
 	
-	PaymentTypeID 	*uint
+	PaymentTypeID 	*uint			 `valid:"required~โปรดกรุณาเลือกธนาคาร"`
 	PaymentType   	PaymentType 	`gorm:"foreignKey:PaymentTypeID"`
 
 }

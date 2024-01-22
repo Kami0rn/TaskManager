@@ -40,19 +40,22 @@ func main() {
 	//Payment
 	r.GET("/payment/:userID", controller.GetPaymentByUserID)
 	r.GET("/payment/edit/:paymentID", controller.GetPaymentByPaymentID)
-
 	r.POST("/payment", controller.CreatePayment)
-	
 	r.PATCH("/payment",controller.UpdatePayment)
-
-	r.DELETE("/payment/:paymentID",controller.DeletePayment)
-
+	r.DELETE("/payment/:paymentID",controller.DeletePaymentByPaymentID)
 	//tier
 	r.GET("/tier",controller.GetAllTier)
-
 	//paymentType
 	r.GET("/paymentType",controller.GetAllPaymentType)	
 
+	//Comment
+	r.GET("/comment/:cardID", controller.GetCommentByCardID)
+	r.GET("/comment/edit/:commentID", controller.GetCommentByCommentID)
+	r.POST("/comment",controller.CreateComment)
+	r.PATCH("/comment",controller.UpdateComment)
+	r.DELETE("/comment/:commentID",controller.DeleteCommentByCommentID)
+
+	
 	r.Run("localhost: " + PORT)
 }
 

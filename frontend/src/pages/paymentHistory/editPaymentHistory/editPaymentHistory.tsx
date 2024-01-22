@@ -31,8 +31,6 @@ function EditPaymentHistory() {
   const [newData, setNewData] = React.useState<Partial<PaymentInterface>>({});
 
   //handle
-  const handleOk = async (id: number) => {};
-
   const handleCan = async () => {
     navigate(`/paymentHistory`);
   };
@@ -43,7 +41,7 @@ function EditPaymentHistory() {
       ID: Number(id),
       PaymentDate: paymentDate,
       Note: newData.Note ?? "",
-      MoneySlip: moneySlip ,
+      MoneySlip: moneySlip,
     };
 
     let res = await UpdatePayment(data);
@@ -103,6 +101,7 @@ function EditPaymentHistory() {
   };
   useEffect(() => {
     getPaymentByPaymentID(ID);
+    
   }, []);
 
   return (
@@ -113,7 +112,7 @@ function EditPaymentHistory() {
         <Content
           style={{
             padding: "10px 10px 10px 10px",
-            height: "100vh",
+            height: "91vh",
             width: "100%",
             display: "flex",
             position: "relative",
@@ -121,20 +120,19 @@ function EditPaymentHistory() {
             alignItems: "center",
           }}
         >
-          <div className="card  w-3/5 h-5/6 bg-base-100  shadow-xl  ">
+          <div className="card  w-3/5 h-5/6 bg-base-100 shadow-xl  ">
             <div className="card-body flex flex-column p-5">
-              <h2 className="card-title mb-2">แก้ไขการชำระเงิน</h2>
-              <h1>Note</h1>
-              
+              <h2 className="card-title mb-1 ">แก้ไขการชำระเงิน</h2>
+              <h1 className="text-base font-bold ml-1 mb-1">Note</h1>
               <input
                 id="Note"
-                className="text-lg"
+                className="input input-bordered input-info input-md w-full max-w-xs ml-1 mb-1"
                 value={newData?.Note}
                 onChange={handleInputChange}
               />
-              <h1>รูปภาพ</h1>
+              <h1 className="text-base font-bold  ml-1 mb-1">รูปภาพ</h1>
               <input
-                className="Modal-Payment-InputForm-inputImage"
+                className="file-input  file-input-bordered file-input-info file-input-sm w-full max-w-xs mb-3 ml-1 mb-1"
                 type="file"
                 name="MoneySlip"
                 onChange={(e) => {
@@ -144,76 +142,25 @@ function EditPaymentHistory() {
                 data-multiple-caption="{count} files selected"
                 multiple
               />
-              <div className="my-3">
-                  <img
-                    className="w-28 h-28"
-                    src={moneySlip}
-                    
-                  ></img>
-                </div>
+              <div className="my-2">
+                <img className=" rounded-lg w-36 h-36 ml-1" src={moneySlip}></img>
+              </div> 
               <div className="card-actions justify-end mr-5 space-x-1">
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleCan()}
-                  >
-                    ยกเลิก
-                  </button>
-                  <button
-                    className="btn btn-primary"
-                    type="submit"
-                    onClick={save}
-                  >
-                    ตกลง
-                  </button>
-                </div>
-              {/* <Form
-                name="basic"
-                layout="vertical"
-                onFinish={onFinish}
-                autoComplete="off"
-              >
-                <p className="mb-2">แก้ไข Note</p>
-                <input
-                  className="input input-bordered w-full max-w-xs mb-4"
-                  value={Object(Payment).Note}
-                ></input>
-                <p className="mb-2">
-                  image
-                </p>
-                <input
-                  className="Modal-Payment-InputForm-inputImage"
-                  type="file"
-                  name="MoneySlip"
-                  onChange={(e) => {
-                    uploadImage(e);
-                  }}
-                  id="file"
-                  data-multiple-caption="{count} files selected"
-                  multiple
-                />
-                <div className="my-3">
-                  <img
-                    className="w-28 h-28"
-                    src={moneySlip}
-                    
-                  ></img>
-                </div>
-                <div className="card-actions justify-end mr-5 space-x-1">
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleCan()}
-                  >
-                    ยกเลิก
-                  </button>
-                  <button
-                    className="btn btn-primary"
-                    type="submit"
-                    onClick={() => handleOk(ID)}
-                  >
-                    ตกลง
-                  </button>
-                </div>
-              </Form> */}
+                <button
+                  className="btn btn-outline btn-sm  hover:bg-gradient-to-r from-cyan-500 to-blue-500  "
+                  type="button"
+                  onClick={() => handleCan()}
+                >
+                  ยกเลิก
+                </button>
+                <button
+                  className="btn btn-active btn-sm text-white bg-cyan-500 hover:bg-gradient-to-r from-cyan-500 to-blue-500"
+                  type="submit"
+                  onClick={save}
+                >
+                  ตกลง
+                </button>
+              </div>
             </div>
           </div>
         </Content>

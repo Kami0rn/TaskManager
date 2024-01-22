@@ -1,8 +1,8 @@
-import { PaymentInterface } from "../../../interfaces/Ipayment";
+import { CommentInterface } from "../../../interfaces/Icomment";
 
 const apiUrl = "http://localhost:8084";
-
-async function GetPaymentByUserID(UserID: number) {
+// GET /comment/:cardID
+async function GetCommentByCardID(cardID: number) {
   const requestOptions = {
     method: "GET",
     headers: {
@@ -10,7 +10,7 @@ async function GetPaymentByUserID(UserID: number) {
     },
   };
 
-  let res = await fetch(`${apiUrl}/payment/${UserID}`, requestOptions)
+  let res = await fetch(`${apiUrl}/comment/${cardID}`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -22,16 +22,15 @@ async function GetPaymentByUserID(UserID: number) {
 
   return res;
 }
-
-async function GetPaymentByPaymentID(PaymentID: number) {
+// GET /comment/edit/:commentID
+async function GetCommentByCommentID(commentID: number) {
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   };
-
-  let res = await fetch(`${apiUrl}/payment/edit/${PaymentID}`, requestOptions)
+  let res = await fetch(`${apiUrl}/comment/edit/${commentID}`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -43,14 +42,14 @@ async function GetPaymentByPaymentID(PaymentID: number) {
 
   return res;
 }
-
-async function CreatePayment(data: PaymentInterface) {
+// POST /comment
+async function CreateComment(data: CommentInterface) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   };
-  let res = await fetch(`${apiUrl}/payment`, requestOptions)
+  let res = await fetch(`${apiUrl}/comment`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -59,14 +58,17 @@ async function CreatePayment(data: PaymentInterface) {
         return { status: false, message: res.error };
       }
     });
+
   return res;
 }
-async function DeletePaymentByID(id: Number | undefined) {
+
+// DELETE /comment/:commentID
+async function DeleteCommentByCommentID(id: Number | undefined) {
   const requestOptions = {
     method: "DELETE",
   };
 
-  let res = await fetch(`${apiUrl}/payment/${id}`, requestOptions)
+  let res = await fetch(`${apiUrl}/comment/${id}`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.message) {
@@ -78,15 +80,15 @@ async function DeletePaymentByID(id: Number | undefined) {
 
   return res;
 }
-
-async function UpdatePayment(data: PaymentInterface) {
+// PATCH /comment
+async function UpdateComment(data: CommentInterface) {
   const requestOptions = {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   };
 
-  let res = await fetch(`${apiUrl}/payment`, requestOptions)
+  let res = await fetch(`${apiUrl}/comment`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -99,4 +101,10 @@ async function UpdatePayment(data: PaymentInterface) {
   return res;
 }
 
-export { GetPaymentByUserID,GetPaymentByPaymentID, CreatePayment, DeletePaymentByID, UpdatePayment };
+export {
+  GetCommentByCardID,
+  GetCommentByCommentID,
+  CreateComment,
+  DeleteCommentByCommentID,
+  UpdateComment,
+};

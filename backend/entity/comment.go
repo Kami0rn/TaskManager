@@ -8,7 +8,7 @@ import (
 
 type Comment struct {	
 	gorm.Model
-	CommentText	 	string 
+	CommentText	 	string 		`valid:"required~โปรดกรองความคิดเห็น,stringlength(0|500)~CommentTextไม่ควรเกิน 500 ตัวอักษร"`
 	EditDatetime	time.Time
 
 	UserID			*uint
