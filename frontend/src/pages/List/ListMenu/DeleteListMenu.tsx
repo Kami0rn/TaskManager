@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
 
 function DeleteListMenu() {
+  const listIDForMenuDelete = localStorage.getItem("listIDForMenu");
+  console.log(listIDForMenuDelete);
   return (
-    <div>DeleteListMenu</div>
-  )
+    <div>
+      <header>DeleteListMenu {listIDForMenuDelete}</header>
+    </div>
+  );
 }
 
-export default DeleteListMenu
+export default DeleteListMenu;

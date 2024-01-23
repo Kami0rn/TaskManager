@@ -1,8 +1,10 @@
 import React from 'react'
 
 function UpdateListMenu() {
+    const listIDForMenuUpdate= localStorage.getItem("listIDForMenu");
+    console.log(listIDForMenuUpdate);
   return (
-    <div>UpdateListMenu</div>
+    <div>UpdateListMenu {listIDForMenuUpdate}</div>
   )
 }
 
