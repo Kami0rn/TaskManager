@@ -45,6 +45,7 @@ func main() {
 	authorized.DELETE("/deleteListFromID/:ListId",Controller.DeleteList)
 	authorized.GET("/projectGetCardsFromListID/:listID", Controller.GetCardFromListID)
 	authorized.POST("/projectCreateCardFromListID/:listID", Controller.CreateCard)
+	authorized.DELETE("/deleteCardFromID/:CardId",Controller.DeleteCard)
 
 
 

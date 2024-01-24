@@ -77,3 +77,12 @@ func GetCardFromListID(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Cards Read Success", "cards": cards})
 }
+
+func DeleteCard(c *gin.Context) {
+	CardId := c.Param("CardId")
+	if tx := entity.DB().Exec("DELETE FROM cards WHERE id = ?", CardId); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": CardId})
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Inject,ScheduleComponent,Day,Week,WorkWeek,Month,Agenda } from '@syncfusion/ej2-react-schedule'
 import Nav from '../src/etc/Nav';
 
 
@@ -9,7 +10,7 @@ import Login from './pages/login/Login';
 import Profile from './pages/profile/Profile';
 import Project from './pages/Project/Project';
 import UseProject from './pages/UseProject/UseProject';
-
+import MyCalendar from './pages/Calendar/MyCalendar';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/project' element={<Project />}/>
           <Route path='/useProject' element={<UseProject />}/>
+          <Route path='/calendar' element={<MyCalendar />} />
           
         </Routes>
 

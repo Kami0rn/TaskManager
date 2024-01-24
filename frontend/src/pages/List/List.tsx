@@ -4,6 +4,7 @@ import { ListInterface } from "../../interfaces/Ilist";
 import CreateList from "./CreateList";
 import CreateCardComponent from "../Card/CreateCardComponent";
 import ListMenu from "./ListMenu/ListMenu";
+import CardMenu from "../Card/CardMenu/CardMenu";
 import "./List.css";
 
 function List() {
@@ -26,6 +27,7 @@ function List() {
   const [showCreateList, setShowCreateList] = useState(false);
   const [showCreateCard, setShowCreateCard] = useState(false);
   const [showListMenu, setShowListMenu] = useState(false);
+  const [showCardMenu, setShowCardMenu] = useState(false);
 
   useEffect(() => {
     async function fetchListData() {
@@ -49,10 +51,18 @@ function List() {
   const handleListMenuClose = () => {
     setShowListMenu(false);
   };
+  const handleCardMenuClick = (cardID: number) => {
+    setShowCardMenu(true);
+    console.log("ListIdForMenu");
+    console.log(cardID);
+    localStorage.setItem("cardIDForMenu", cardID.toString());
+  };
+  const handleCardMenuClose = () => {
+    setShowCardMenu(false);
+  };
 
   return (
-    <div>
-      <h1>List Items</h1>
+    <div className="pt-5 pl-2">
       <ul className="flex">
         {lists.map((list, index) => (
           <li
@@ -60,7 +70,12 @@ function List() {
             className="ListBox bg-slate-400 rounded-md mx-2 w-2/12 flex flex-col  align-center "
           >
             <div className="w-full grid justify-items-end">
-              <button className="mr-5" onClick={() => handleListMenuClick(list.ID)}>...</button>
+              <button
+                className="mr-5"
+                onClick={() => handleListMenuClick(list.ID)}
+              >
+                ...
+              </button>
             </div>
 
             <h3 className="m-3">{list.ListName}</h3>
@@ -69,10 +84,18 @@ function List() {
                 list.Cards.map((card) => (
                   <li
                     key={card.ID}
-                    className="CardBox m-2 p-2 bg-slate-200 rounded-md"
+                    className="CardBox flex flex-col m-2 p-2 bg-slate-200 rounded-md relative"
                   >
+                    <button
+                      onClick={() => handleCardMenuClick(card.ID || 0)}
+                      className="absolute top-0 right-0 mr-3 text-stone-400"
+                    >
+                      +
+                    </button>
                     <h4>{card.CardName}</h4>
-                    <p>{card.CardDescription}</p>
+                    <p className="text-xs text-stone-500">
+                      {card.CardDescription}
+                    </p>
                   </li>
                 ))}
             </ul>
@@ -103,6 +126,22 @@ function List() {
             </span>
             <div className="mt-5">
               <ListMenu />
+            </div>
+          </div>
+        </div>
+      )}
+            {showCardMenu && (
+        <div className="modal">
+          <div className="modal-content">
+            <span
+              className="close"
+              onClick={handleCardMenuClose}
+              style={{ position: "absolute", right: "10px" }}
+            >
+              &times;
+            </span>
+            <div className="mt-5">
+              <CardMenu />
             </div>
           </div>
         </div>
