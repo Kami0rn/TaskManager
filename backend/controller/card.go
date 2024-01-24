@@ -16,7 +16,7 @@ func CreateCard(c *gin.Context) {
 	// Extract list ID from the request
 	listID, err := strconv.Atoi(c.Param("listID"))
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid list ID"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid card ID"})
 		return
 	}
 

@@ -47,6 +47,11 @@ func main() {
 	authorized.POST("/projectCreateCardFromListID/:listID", Controller.CreateCard)
 	authorized.DELETE("/deleteCardFromID/:CardId",Controller.DeleteCard)
 
+	authorized.GET("/projectGetDeadlineFromID/:carlendarId", Controller.GetdeadlineFromProjectID)
+	authorized.POST("/createDeadlineFromCalendarID/:carlendarId",Controller.CreateDeadline)
+
+	authorized.GET("/projectGetCalendarFromID/:projectID",Controller.GetCalendarFromProjectID)
+	authorized.POST("/createCalendarFromProjectID/:projectId",Controller.CreateCalendar)
 
 
 	r.Run("localhost: " + PORT)
