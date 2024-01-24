@@ -30,12 +30,17 @@ return res;
 
 
 
-async function DeleteUserByID(id: Number | undefined) {
+async function DeleteListByID(ListId: Number | undefined) {
+  const userToken = localStorage.getItem('token');
   const requestOptions = {
-    method: "DELETE"
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+      "Content-Type": "application/json",
+    },
   };
 
-  let res = await fetch(`${apiUrl}/users/${id}`, requestOptions)
+  let res = await fetch(`${apiUrl}/users/deleteListFromID/${ListId}`, requestOptions)
     .then((response) => response.json())
     .then((res) => {
       if (res.data) {
@@ -134,7 +139,7 @@ export {
 
     GetListByProjectId,
     CreateUser,
-    DeleteUserByID,
+    DeleteListByID,
     GetUserById,
     UpdateUser,
     GetUserByHash

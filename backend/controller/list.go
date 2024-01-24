@@ -50,7 +50,7 @@ func CreateList(c *gin.Context) {
     }
     
 
-    c.JSON(http.StatusOK, gin.H{"data": newList})
+    c.JSON(http.StatusOK, gin.H{"data": newList , "message": "List created successfully"})
 }
 
 
@@ -80,4 +80,32 @@ func GetListsFromID(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Lists Read Success", "lists": lists})
 }
 
+func DeleteList(c *gin.Context) {
+	ListId := c.Param("ListId")
+	if tx := entity.DB().Exec("DELETE FROM lists WHERE id = ?", ListId); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": ListId})
+}
 
+func UpdateList(c *gin.Context) {
+	var list entity.List
+	var result entity.List
+
+	if err := c.ShouldBindJSON(&list); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	// ค้นหา user ด้วย id
+	if tx := entity.DB().Where("id = ?", list.ID).First(&result); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "list not found"})
+		return
+	}
+
+	if err := entity.DB().Save(&list).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": list,"message": "List updated successfully"})
+}

@@ -57,9 +57,12 @@ function List() {
         {lists.map((list, index) => (
           <li
             key={list.ID}
-            className="ListBox bg-slate-400 rounded-md mx-2 w-2/12 flex flex-col  align-center"
+            className="ListBox bg-slate-400 rounded-md mx-2 w-2/12 flex flex-col  align-center "
           >
-            <button onClick={() => handleListMenuClick(list.ID)}>...</button>
+            <div className="w-full grid justify-items-end">
+              <button className="mr-5" onClick={() => handleListMenuClick(list.ID)}>...</button>
+            </div>
+
             <h3 className="m-3">{list.ListName}</h3>
             <ul>
               {list.Cards &&
