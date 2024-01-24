@@ -11,6 +11,7 @@ import Profile from './pages/profile/Profile';
 import Project from './pages/Project/Project';
 import UseProject from './pages/UseProject/UseProject';
 import MyCalendar from './pages/Calendar/MyCalendar';
+import Home from "./pages/Home/Home"
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path='/project' element={<Project />}/>
           <Route path='/useProject' element={<UseProject />}/>
           <Route path='/calendar' element={<MyCalendar />} />
+          <Route path="/" element={<Home />} />
           
         </Routes>
 

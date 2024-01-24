@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import UpdateCardMenu from "./UpdateCardMenu";
 import DeleteCardMenu from "./DeleteCardMenu";
+import CreateDeadline from "./CeateDeadline"
 
 function CardMenu() {
   const listIDForMenu = localStorage.getItem("cardIDForMenu");
@@ -9,6 +10,7 @@ function CardMenu() {
 
   const [showUpdateList, setShowUpdateList] = useState(false);
   const [showDeleteList, setShowDeleteeList] = useState(false);
+  const [showDeadline, setShowDeadline] = useState(false);
 
   const handleUpdateListClick = (listIDForMenuUpdate: number) => {
     console.log("listIDForMenuUpdate :");
@@ -19,6 +21,7 @@ function CardMenu() {
   const handleUpdateListClose = () => {
     setShowUpdateList(false);
   };
+
   const handleDeleteListClick = (listIDForMenuDelete: number) => {
     console.log("listIDForMenuDelete :");
     console.log(listIDForMenuDelete);
@@ -27,6 +30,16 @@ function CardMenu() {
   };
   const handleDeleteListClose = () => {
     setShowDeleteeList(false);
+  };
+
+  const handleCreateDeadlineClick = (listIDForMenuDeadline: number) => {
+    console.log("listIDForAddDeadline :");
+    console.log(listIDForMenuDeadline);
+    console.log(":end");
+    setShowDeadline(true);
+  };
+  const handleCreateDeadlineClose = () => {
+    setShowDeadline(false);
   };
 
   return (
@@ -53,6 +66,16 @@ function CardMenu() {
         >
           Delete
         </button>
+        <button
+          className="bg-green-500 rounded-md text-white my-2"
+          onClick={() =>
+            handleCreateDeadlineClick(
+              listIDForMenu !== null ? parseInt(listIDForMenu, 10) : 0
+            )
+          }
+        >
+          Set Deadline
+        </button>
       </body>
 
       {showUpdateList && (
@@ -72,6 +95,16 @@ function CardMenu() {
               &times;
             </span>
             <DeleteCardMenu />
+          </div>
+        </div>
+      )}
+      {showDeadline && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={handleCreateDeadlineClose}>
+              &times;
+            </span>
+            <CreateDeadline />
           </div>
         </div>
       )}

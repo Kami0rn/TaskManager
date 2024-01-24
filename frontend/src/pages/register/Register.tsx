@@ -59,7 +59,7 @@ function Register() {
       
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <label>
-          Fname:
+        UserName:
           <input
             type="text"
             name="UserName"
@@ -68,18 +68,18 @@ function Register() {
           />
         </label>
         <label>
-          Username:
+        Password:
           <input
-            type="text"
+            type="password"
             name="Password"
             value={inputs.Password || ""}
             onChange={handleChange}
           />
         </label>
         <label>
-          Password:
+        FullName:
           <input
-            type="password"
+            type="text"
             name="FullName"
             value={inputs.FullName || ""}
             onChange={handleChange}

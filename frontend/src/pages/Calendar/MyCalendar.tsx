@@ -51,15 +51,18 @@ function MyCalendar() {
   const handleDateSelect = (date: Dayjs) => {
     // Assuming you want to add a new booking for the selected date
     const newBooking: Booking = {
+      
       start: date.clone(),
       end: date.clone().endOf("day"), // Adjust end time as needed
       title: "New Booking",
     };
+    console.log(newBooking)
 
     setCurrentBookings([...currentBookings, newBooking]);
   };
 
   const dateCellRender = (value: Dayjs) => {
+    
     const bookingsOnDate = currentBookings.filter(
       (booking) =>
         value.isSame(booking.start, "day") ||

@@ -1,7 +1,7 @@
 package entity
 
 import (
-	"time"
+
 
 	"gorm.io/gorm"
 )
@@ -9,8 +9,7 @@ import (
 type Calendar struct {	
 	gorm.Model
 	Record	 		string 
-	StartDate	 	time.Time 
-	EndDate			time.Time
+
 
 	//FK 
 	ProjectID		*uint
