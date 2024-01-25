@@ -8,16 +8,16 @@
 
 	type Card struct {	
 		gorm.Model
-		CardName	 		string 
-		CardDescription	 	string 
+		CardName	 		string `valid:"required~Please fill Cardname"`
+		CardDescription	 	string `valid:"required~Please fill Card description"`
 		CreateCard			time.Time
 
 		//FK 
 		ListID			*uint
-		List			List 		`gorm:"foreignKey:ListID"`
+		List			List 		`gorm:"foreignKey:ListID"  valid:"-"`
 
 		CardStatusID	*uint 
-		CardStatus 		CardStatus 	`gorm:"foreignKey:CardStatusID"`
+		CardStatus 		CardStatus 	`gorm:"foreignKey:CardStatusID"  valid:"-"`
 
 		//give FK
 		Comments		[]Comment	`gorm:"foreignKey:CardID"`

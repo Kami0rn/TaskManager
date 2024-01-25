@@ -13,7 +13,14 @@ func CreateList(c *gin.Context) {
     var list entity.List
     var project entity.Project
 
+    // Bind data from JSON
     if err := c.ShouldBindJSON(&list); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    // Validate list data using govalidator
+    if _, err := govalidator.ValidateStruct(list); err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
@@ -27,7 +34,7 @@ func CreateList(c *gin.Context) {
 
     // Find project based on projectID
     if err := entity.DB().First(&project, projectId).Error; err != nil {
-        c.JSON(http.StatusBadRequest, gin.H{"error": "project not found"})
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Project not found"})
         return
     }
 
@@ -39,19 +46,15 @@ func CreateList(c *gin.Context) {
         Project:         project,
     }
 
-    if _,err := govalidator.ValidateStruct(list); err != nil {
-        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-        return
-    }
     // Save to database
     if err := entity.DB().Create(&newList).Error; err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
-    
 
-    c.JSON(http.StatusOK, gin.H{"data": newList , "message": "List created successfully"})
+    c.JSON(http.StatusOK, gin.H{"data": newList, "message": "List created successfully"})
 }
+
 
 
 func GetListsFromID(c *gin.Context) {

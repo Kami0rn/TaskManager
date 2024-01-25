@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 	"time"
+	"github.com/asaskevich/govalidator"
 )
 
 func GetdeadlineFromProjectID(c *gin.Context) {
@@ -29,47 +30,49 @@ func GetdeadlineFromProjectID(c *gin.Context) {
 }
 
 func CreateDeadline(c *gin.Context) {
-	var deadline entity.Deadline
+    var deadline entity.Deadline
 
-	// Extract list ID from the request
-	carlendarId, err := strconv.Atoi(c.Param("carlendarId"))
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid calendar ID"})
-		return
-	}
+    // Extract calendar ID from the request
+    calendarID, err := strconv.Atoi(c.Param("carlendarId"))
+    if err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid calendar ID"})
+        return
+    }
 
-	// Bind card data from JSON
-	if err := c.ShouldBindJSON(&deadline); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
+    // Bind data from JSON
+    if err := c.ShouldBindJSON(&deadline); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
 
-	// Set the list ID for the new card
-	calendarIDUint := uint(carlendarId)
-	deadline.CalendarID = &calendarIDUint
+    // Set the calendar ID for the new deadline
+    calendarIDUint := uint(calendarID)
+    deadline.CalendarID = &calendarIDUint
 
-	// Validate card data using govalidator or your preferred validation method
+    // Validate deadline data using govalidator
 
-	// Here, you can save the new card to your database or perform any other necessary actions
-	// For example, assuming you have a function to save the card:
-	// savedCard, err := repository.SaveCard(&card)
-	// Check for errors and handle accordingly
-	newDeadline := entity.Deadline{
-		DeadlineName: deadline.DeadlineName,
-		Description:  deadline.Description,
-		StartDate:    time.Now(),
-		EndDate:      time.Now(),
-		CalendarID: &calendarIDUint,
-	}
 
-	// Save to database
-	if err := entity.DB().Create(&newDeadline).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
+    // Create a new deadline instance with current time for StartDate and EndDate
+    newDeadline := entity.Deadline{
+        DeadlineName: deadline.DeadlineName,
+        Description:  deadline.Description,
+        StartDate:    time.Now(),
+        EndDate:      time.Now(),
+        CalendarID:   &calendarIDUint,
+    }
 
-	// c.JSON(http.StatusOK, gin.H{"data": newCard})
+	if _, err := govalidator.ValidateStruct(newDeadline); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+	
+    // Save to the database
+    if err := entity.DB().Create(&newDeadline).Error; err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
 
-	// Return the created card in the response
-	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Deadline created successfully", "deadline": deadline, "data": newDeadline})
+    // Return the created deadline in the response
+    c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Deadline created successfully", "deadline": deadline, "data": newDeadline})
 }
+

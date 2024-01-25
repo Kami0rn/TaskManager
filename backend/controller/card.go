@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 	"time"
-	// "github.com/asaskevich/govalidator"
+	"github.com/asaskevich/govalidator"
 	"github.com/Kami0rn/TaskManager/entity"
 	"github.com/gin-gonic/gin"
 )
@@ -43,7 +43,10 @@ func CreateCard(c *gin.Context) {
         CreateCard:   time.Now(),
         ListID:         card.ListID,
     }
-
+    if _, err := govalidator.ValidateStruct(card); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
 	
     // Save to database
 	if err := entity.DB().Create(&newCard).Error; err != nil {

@@ -24,7 +24,7 @@ func TestCardName(t *testing.T) {
         g.Expect(ok).NotTo(BeTrue())
         g.Expect(err).NotTo(BeNil())
 
-        g.Expect(err.Error()).To(Equal("Please fill CardName"))
+        g.Expect(err.Error()).To(Equal("Please fill Cardname"))
     })
 }
 
@@ -45,7 +45,7 @@ func TestCardDes(t *testing.T) {
         g.Expect(ok).NotTo(BeTrue())
         g.Expect(err).NotTo(BeNil())
 
-        g.Expect(err.Error()).To(Equal("Please fill description"))
+        g.Expect(err.Error()).To(Equal("Please fill Card description"))
     })
 }
 

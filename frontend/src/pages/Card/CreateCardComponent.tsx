@@ -64,6 +64,7 @@ const CreateCardComponent: React.FC = () => {
         
         
         
+        
       } else {
         console.error("Error creating card. Status:", response.status);
       }
