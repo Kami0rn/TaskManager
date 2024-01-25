@@ -51,7 +51,7 @@ function MyCalendar() {
     return (
       <ul>
         {deadlinesOnDate.map((deadline) => (
-          <li className="bg-cyan-400 rounded my-1" key={deadline.ID}>
+          <li className="text-white bg-gradient-to-b from-amber-700 to-amber-500 rounded my-1 hover:from-amber-800 hover:to-amber-800" key={deadline.ID}>
             {String(deadline.DeadlineName)}
           </li>
         ))}
