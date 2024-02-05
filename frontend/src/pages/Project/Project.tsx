@@ -33,7 +33,7 @@ function Project() {
         return;
       }
 
-      const response = await fetch(`http://localhost:8080/users/getProject/${projectId}`, {
+      const response = await fetch(`http://localhost:8081/users/getProject/${projectId}`, {
         headers: {
           Authorization: `Bearer ${userToken}`,
           'Content-Type': 'application/json',

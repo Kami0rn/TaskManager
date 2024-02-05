@@ -38,7 +38,7 @@ function Login(): JSX.Element {
       redirect: "follow",
     };
 
-    fetch("http://localhost:8080/login", requestOptions)
+    fetch("http://localhost:8081/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result); // Log the entire response

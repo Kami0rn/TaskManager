@@ -32,7 +32,7 @@ function CreateList() {
       });
 
       const response = await fetch(
-        `http://localhost:8080/users/createList/${projectId}`,
+        `http://localhost:8081/users/createList/${projectId}`,
         {
           method: "POST",
           headers: {

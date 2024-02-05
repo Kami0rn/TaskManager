@@ -1,7 +1,7 @@
 // Adjust the import based on your actual interface
 import { CardInterface } from "../../../interfaces/Icard";
 
-const apiUrl = "http://localhost:8080";
+const apiUrl = "http://localhost:8081";
 
 async function GetCardsFromListID(listID: number) {
   const userToken = localStorage.getItem("token");

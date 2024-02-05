@@ -1,6 +1,6 @@
 import React from 'react'
 import { CarlendarInterface } from "../../../interfaces/Icalendar";
-const apiUrl = "http://localhost:8080";
+const apiUrl = "http://localhost:8081";
 
 export async function GetCalendarByProjectId(calendarId: number) {
   const userToken = localStorage.getItem("token");

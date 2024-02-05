@@ -43,7 +43,7 @@ function Profile() {
       },
     };
 
-    fetch('http://localhost:8080/users/profile', requestOptions)
+    fetch('http://localhost:8081/users/profile', requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result);

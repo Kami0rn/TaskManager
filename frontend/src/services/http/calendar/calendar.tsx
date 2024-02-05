@@ -1,6 +1,6 @@
 import React from "react";
 
-const apiUrl = "http://localhost:8080";
+const apiUrl = "http://localhost:8081";
 
 async function GetCalendarByProjectId(projectId: number) {
   const userToken = localStorage.getItem("token");
