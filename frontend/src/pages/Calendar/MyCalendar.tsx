@@ -18,7 +18,8 @@ function MyCalendar() {
     // Fetch calendar data from the API using the provided function
     const fetchCalendarData = async () => {
       try {
-        const calendarId = 1; // Replace with the actual calendar ID or get it dynamically
+         // Replace with the actual calendar ID or get it dynamically
+        const calendarId = Number(localStorage.getItem("projectId"));
         const result = await GetCalendarByProjectId(calendarId);
 
         console.log(result); // Log the entire result object
