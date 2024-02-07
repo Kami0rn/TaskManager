@@ -41,9 +41,12 @@ func main() {
 	authorized.POST("/createList/:projectId", Controller.CreateList)
 	authorized.DELETE("/deleteListFromID/:ListId", Controller.DeleteList)
 	authorized.PATCH("/updateList",Controller.UpdateList)
+
 	authorized.GET("/projectGetCardsFromListID/:listID", Controller.GetCardFromListID)
 	authorized.POST("/projectCreateCardFromListID/:listID", Controller.CreateCard)
 	authorized.DELETE("/deleteCardFromID/:CardId", Controller.DeleteCard)
+	authorized.PATCH("/updateCard",Controller.UpdateCard)
+	authorized.GET("/getCardFromID/:cardIDForMenu",Controller.GetCardFromID)
 	
 
 	authorized.GET("/projectGetDeadlineFromID/:carlendarId", Controller.GetdeadlineFromProjectID)

@@ -80,32 +80,45 @@ async function CreateCard(listID: number, cardData: CardInterface) {
   }
 }
 
-async function UpdateCard(cardID: number, cardData: CardInterface) {
-  const userToken = localStorage.getItem("token");
+async function UpdateCard(data: CardInterface) {
+  const userToken = localStorage.getItem('token');
   const requestOptions = {
-    method: "PATCH",
+    
+    method: "PATCH", 
     headers: {
       Authorization: `Bearer ${userToken}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(cardData),
+    body: JSON.stringify(data),
   };
 
   try {
-    const response = await fetch(
-      `${apiUrl}/users/cards/${cardID}`,
-      requestOptions
-    );
-    const data = await response.json();
+    const response = await fetch(`${apiUrl}/users/updateCard`, requestOptions);
 
-    if (data.status === "ok") {
-      return { status: true, message: data.message };
-    } else {
-      return { status: false, message: data.error };
+    if (!response.ok) {
+      // Handle HTTP error responses
+      const errorMessage = await response.text();
+      throw new Error(`HTTP error! Status: ${response.status}. ${errorMessage}`);
     }
+
+    // Check if response is not empty
+    const responseBody = await response.text();
+    if (!responseBody) {
+      throw new Error("Empty response received from the server.");
+    }
+
+    const responseData = JSON.parse(responseBody);
+
+    // Check if the server response contains an error property
+    if (responseData.error) {
+      return { status: false, message: responseData.error };
+    }
+
+    // Assuming successful response structure
+    return { status: true, message: responseData.data };
   } catch (error) {
     console.error("Error updating card:", error);
-    return { status: false, message: "Failed to update card." };
+    return { status: false, message: "An unexpected error occurred." };
   }
 }
 
@@ -134,5 +147,35 @@ async function DeleteCardByID(CardId: Number | undefined) {
 
   return res;
 }
+async function GetCardById(cardIDForMenu:number) {
+  const userToken = localStorage.getItem('token');
+  const requestOptions = {
+    
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+      "Content-Type": "application/json",
+    },
+  };
 
-export { GetCardsFromListID, CreateCard, UpdateCard, DeleteCardByID };
+  let res = await fetch(`${apiUrl}/users/getCardFromID/${cardIDForMenu}`, requestOptions)
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.card) {
+        console.log(res);
+        return res;
+      } else {
+        return false;
+      }
+  });
+  return res;
+}
+
+
+export { 
+  GetCardsFromListID, 
+  GetCardById,
+  CreateCard, 
+  UpdateCard, 
+  DeleteCardByID 
+};

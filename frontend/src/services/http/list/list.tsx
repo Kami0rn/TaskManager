@@ -143,7 +143,7 @@ async function UpdateList(data: ListInterface) {
   const userToken = localStorage.getItem('token');
   const requestOptions = {
     
-    method: "PATCH",
+    method: "PATCH", 
     headers: {
       Authorization: `Bearer ${userToken}`,
       "Content-Type": "application/json",
