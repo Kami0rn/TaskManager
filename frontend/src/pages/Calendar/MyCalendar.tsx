@@ -4,25 +4,23 @@ import dayjs, { Dayjs } from "dayjs";
 import ProjectSidebar from "../Project/ProjectSidebar";
 import { DeadlineInterface } from "../../interfaces/Ideadline";
 import { GetCalendarByProjectId } from "../../services/http/deadline/deadline";
+import CalendarMenu from "./CalendarMenu"; // Import your CalendarMenu component
 
-interface Booking {
-  start: Dayjs;
-  end: Dayjs;
-  title: string;
+interface MyCalendarProps {
+  // Add any additional props if needed
 }
 
-function MyCalendar() {
+function MyCalendar(props: MyCalendarProps) {
   const [deadlines, setDeadlines] = useState<DeadlineInterface[]>([]);
+  const [selectedDeadlineID, setSelectedDeadlineID] = useState<number | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     // Fetch calendar data from the API using the provided function
     const fetchCalendarData = async () => {
       try {
-         // Replace with the actual calendar ID or get it dynamically
         const calendarId = Number(localStorage.getItem("projectId"));
         const result = await GetCalendarByProjectId(calendarId);
-
-        console.log(result); // Log the entire result object
 
         if (result && result.deadlines) {
           setDeadlines(result.deadlines);
@@ -35,10 +33,20 @@ function MyCalendar() {
     };
 
     fetchCalendarData();
-  }, []); // Empty dependency array ensures this effect runs once when the component mounts
+  }, []);
 
   const handleDateSelect = (date: Dayjs) => {
-    // You can add logic here to handle date selection if needed
+    const deadlineOnSelectedDate = deadlines.find(
+      (deadline) =>
+        date.isSame(dayjs(deadline.StartDate), "day") ||
+        (date.isAfter(dayjs(deadline.StartDate), "day") &&
+          date.isBefore(dayjs(deadline.EndDate), "day"))
+    );
+
+    if (deadlineOnSelectedDate && deadlineOnSelectedDate.ID !== undefined) {
+      setSelectedDeadlineID(deadlineOnSelectedDate.ID);
+      setIsModalVisible(true);
+    }
   };
 
   const dateCellRender = (date: Dayjs) => {
@@ -52,7 +60,10 @@ function MyCalendar() {
     return (
       <ul>
         {deadlinesOnDate.map((deadline) => (
-          <li className="text-white bg-gradient-to-b from-amber-700 to-amber-500 rounded my-1 hover:from-amber-800 hover:to-amber-800" key={deadline.ID}>
+          <li
+            className="text-white bg-gradient-to-b from-amber-700 to-amber-500 rounded my-1 hover:from-amber-800 hover:to-amber-800"
+            key={deadline.ID}
+          >
             {String(deadline.DeadlineName)}
           </li>
         ))}
@@ -72,6 +83,14 @@ function MyCalendar() {
           }}
           dateCellRender={dateCellRender}
         />
+        {/* Render CalendarMenu modal */}
+        {isModalVisible && (
+          <CalendarMenu
+            isVisible={isModalVisible}
+            deadlineID={selectedDeadlineID}
+            onClose={() => setIsModalVisible(false)}
+          />
+        )}
       </div>
     </div>
   );

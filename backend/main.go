@@ -51,7 +51,7 @@ func main() {
 
 	authorized.GET("/projectGetDeadlineFromID/:carlendarId", Controller.GetdeadlineFromProjectID)
 	authorized.POST("/createDeadlineFromCalendarID", Controller.CreateDeadline)
-
+	authorized.DELETE("/deleteDeadlineFromID/:DeadlineId", Controller.DeleteDeadline)
 
 
 

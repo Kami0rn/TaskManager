@@ -80,6 +80,16 @@ func CreateDeadline(c *gin.Context) {
 }
 
 
+func DeleteDeadline(c *gin.Context) {
+	DeadlineId := c.Param("DeadlineId")
+	if tx := entity.DB().Exec("DELETE FROM deadlines WHERE id = ?", DeadlineId); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "deadline not found"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": DeadlineId,"status": "ok", "message": "Deadline delete Success"})
+}
+
+
 
 
 

@@ -67,3 +67,30 @@ export async function CreateDeadline(formData:any) {
   }
 }
 
+
+export async function DeleteDeadlineByID(DeadlineId: Number | undefined) {
+  const userToken = localStorage.getItem("token");
+  const requestOptions = {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  let res = await fetch(
+    `${apiUrl}/users/deleteDeadlineFromID/${DeadlineId}`,
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((res) => {
+      if (res.data) {
+        return res.data;
+      } else {
+        return false;
+      }
+    });
+
+  return res;
+}
+

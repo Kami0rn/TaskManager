@@ -78,7 +78,8 @@ function List() {
               </button>
             </div>
 
-            <h3 className="m-3">{list.ListName}</h3>
+            <h3 className="mx-3 ">{list.ListName}</h3>
+            <h4 className="mx-3 mb-3 text-xs text-gray-600">{list.ListDescription}</h4>
             <ul>
               {list.Cards &&
                 list.Cards.map((card) => (
