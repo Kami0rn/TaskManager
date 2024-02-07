@@ -1,39 +1,39 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/Kami0rn/TaskManager/entity"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
-	"fmt"
-
 )
 
 func GetCalendarFromProjectID(c *gin.Context) {
-    projectIDStr := c.Param("projectID")
-    projectID, err := strconv.ParseUint(projectIDStr, 10, 64)
-    if err != nil {
-        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid project ID"})
-        return
-    }
+	projectIDStr := c.Param("projectID")
+	projectID, err := strconv.ParseUint(projectIDStr, 10, 64)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid project ID"})
+		return
+	}
 
-    c.Set("projectID", uint(projectID))
+	c.Set("projectID", uint(projectID))
 
-    db := entity.DB()
-    var calendar []entity.Calendar
+	db := entity.DB()
+	var calendar []entity.Calendar
 
-    // Fetch all lists related to the specific project ID
-    db.Where("project_id = ?", projectID).Find(&calendar)
+	// Fetch all lists related to the specific project ID and preload the Deadline
+	// Preload the Deadlines association
+	db.Where("project_id = ?", projectID).Preload("Deadlines").Find(&calendar)
 
-    if db.Error != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": db.Error.Error()})
-        return
-    }
+	if db.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": db.Error.Error()})
+		return
+	}
+
 	fmt.Println("Project ID:", projectID)
 
-    c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Calendar Read Success", "calendar": calendar, "ProjecID": projectID})
+	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Calendar Read Success", "calendar": calendar, "ProjecID": projectID})
 }
-
 
 func CreateCalendar(c *gin.Context) {
 	var calendar entity.Calendar
@@ -45,7 +45,6 @@ func CreateCalendar(c *gin.Context) {
 		return
 	}
 
-
 	// Bind card data from JSON
 	if err := c.ShouldBindJSON(&calendar); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -56,17 +55,14 @@ func CreateCalendar(c *gin.Context) {
 	projectIDUint := uint(projectId)
 	calendar.ProjectID = &projectIDUint
 
-
-
-
 	// Validate card data using govalidator or your preferred validation method
 
 	// Here, you can save the new card to your database or perform any other necessary actions
 	// For example, assuming you have a function to save the card:
 	// savedCard, err := repository.SaveCard(&card)
 	// Check for errors and handle accordingly
-	newCalendar:= entity.Calendar{
-		Record : calendar.Record,
+	newCalendar := entity.Calendar{
+		Record:    calendar.Record,
 		ProjectID: &projectIDUint,
 	}
 

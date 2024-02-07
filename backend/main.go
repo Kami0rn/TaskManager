@@ -50,7 +50,12 @@ func main() {
 	
 
 	authorized.GET("/projectGetDeadlineFromID/:carlendarId", Controller.GetdeadlineFromProjectID)
-	authorized.POST("/createDeadlineFromCalendarID/:carlendarId", Controller.CreateDeadline)
+	authorized.POST("/createDeadlineFromCalendarID", Controller.CreateDeadline)
+
+
+
+
+
 
 	authorized.GET("/projectGetCalendarFromID/:projectID", Controller.GetCalendarFromProjectID)
 	authorized.POST("/createCalendarFromProjectID/:projectId", Controller.CreateCalendar)

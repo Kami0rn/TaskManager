@@ -33,3 +33,37 @@ export async function GetCalendarByProjectId(calendarId: number) {
     return false;
   }
 }
+
+// yourApiFunctions.js
+
+export async function CreateDeadline(formData:any) {
+  const userToken = localStorage.getItem('token');
+   // Update with your API URL
+
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  };
+
+  try {
+    const response = await fetch(
+      `${apiUrl}/users/createDeadlineFromCalendarID`,
+      requestOptions
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error creating deadline:', error);
+    return false;
+  }
+}
+

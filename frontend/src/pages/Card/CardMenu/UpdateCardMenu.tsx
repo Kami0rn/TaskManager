@@ -50,9 +50,19 @@ function UpdateCardMenu() {
 
       } else {
         console.error("Error updating card:", response.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Failed to create the deadline. Please try again.',
+        });
       }
     } catch (error) {
       console.error("Error updating card:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'Failed to create the deadline. Please try again.',
+      });
     }
   };
   

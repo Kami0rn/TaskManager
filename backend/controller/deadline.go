@@ -2,11 +2,12 @@ package controller
 
 import (
 	"github.com/Kami0rn/TaskManager/entity"
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
-	"time"
-	"github.com/asaskevich/govalidator"
+
+
 )
 
 func GetdeadlineFromProjectID(c *gin.Context) {
@@ -32,40 +33,39 @@ func GetdeadlineFromProjectID(c *gin.Context) {
 func CreateDeadline(c *gin.Context) {
     var deadline entity.Deadline
 
-    // Extract calendar ID from the request
-    calendarID, err := strconv.Atoi(c.Param("carlendarId"))
-    if err != nil {
-        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid calendar ID"})
-        return
-    }
-
     // Bind data from JSON
     if err := c.ShouldBindJSON(&deadline); err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
 
-    // Set the calendar ID for the new deadline
-    calendarIDUint := uint(calendarID)
-    deadline.CalendarID = &calendarIDUint
+    // Extract calendar ID from the JSON data
+    calendarID := deadline.CalendarID
+    if calendarID == nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid calendar ID"})
+        return
+    }
+
+    // Parse start_date and end_date into time.Time
+    startDate := deadline.StartDate
+    endDate := deadline.EndDate
 
     // Validate deadline data using govalidator
 
-
-    // Create a new deadline instance with current time for StartDate and EndDate
+    // Create a new deadline instance with the provided start and end dates
     newDeadline := entity.Deadline{
         DeadlineName: deadline.DeadlineName,
         Description:  deadline.Description,
-        StartDate:    time.Now(),
-        EndDate:      time.Now(),
-        CalendarID:   &calendarIDUint,
+        StartDate:    startDate,
+        EndDate:      endDate,
+        CalendarID:   calendarID,
     }
 
-	if _, err := govalidator.ValidateStruct(newDeadline); err != nil {
+    if _, err := govalidator.ValidateStruct(newDeadline); err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
-	
+
     // Save to the database
     if err := entity.DB().Create(&newDeadline).Error; err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -75,4 +75,10 @@ func CreateDeadline(c *gin.Context) {
     // Return the created deadline in the response
     c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "Deadline created successfully", "deadline": deadline, "data": newDeadline})
 }
+
+
+
+
+
+
 
