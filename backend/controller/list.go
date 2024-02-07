@@ -7,6 +7,7 @@ import (
     "github.com/asaskevich/govalidator"
 	"github.com/Kami0rn/TaskManager/entity"
 	"github.com/gin-gonic/gin"
+	"fmt"
 )
 
 func CreateList(c *gin.Context) {
@@ -93,22 +94,51 @@ func DeleteList(c *gin.Context) {
 }
 
 func UpdateList(c *gin.Context) {
+	
+	fmt.Println("Handling PATCH request for /users/updateList")
+	var updatedList entity.List
+  
+	// Bind data from JSON
+	if err := c.ShouldBindJSON(&updatedList); err != nil {
+	  c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	  return
+	}
+  
+	var existingList entity.List
+  
+	// Find the existing list based on the ID
+	if tx := entity.DB().Where("id = ?", updatedList.ID).First(&existingList); tx.RowsAffected == 0 {
+	  c.JSON(http.StatusBadRequest, gin.H{"error": "list not found"})
+	  return
+	}
+  
+	// Merge the changes into the existing list
+	// You may customize this part based on how you want to handle partial updates
+	entity.DB().Model(&existingList).Updates(updatedList)
+  
+	c.JSON(http.StatusOK, gin.H{"data": existingList, "message": "List updated successfully", "status": "ok"})
+  }
+  
+
+
+
+func GetListFromID(c *gin.Context)  {
+	listIdStr := c.Param("listIDForMenu")
+	listId, err := strconv.ParseUint(listIdStr, 10, 64)
+	if err != nil {
+		// Handle error - parsing failed
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid listIDForMenu ID"})
+		return
+	}
+	db := entity.DB()
 	var list entity.List
-	var result entity.List
 
-	if err := c.ShouldBindJSON(&list); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-	// ค้นหา user ด้วย id
-	if tx := entity.DB().Where("id = ?", list.ID).First(&result); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "list not found"})
-		return
-	}
+	result := db.Where("id = ?", listId).Find(&list)
+	if result.RowsAffected == 0 {
+        // List with the given ID not found
+        c.JSON(http.StatusNotFound, gin.H{"error": "List not found"})
+        return
+    }
 
-	if err := entity.DB().Save(&list).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-	c.JSON(http.StatusOK, gin.H{"data": list,"message": "List updated successfully"})
+	c.JSON(http.StatusOK, gin.H{"status": "ok", "message": "List Read Success", "list": list})
 }
