@@ -41,8 +41,10 @@ func CreateDeadline(c *gin.Context) {
 
     // Extract calendar ID from the JSON data
     calendarID := deadline.CalendarID
-    if calendarID == nil {
-        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid calendar ID"})
+    cardID := deadline.CardID
+
+    if calendarID == nil || cardID == nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid calendar ID or card ID"})
         return
     }
 
@@ -59,6 +61,7 @@ func CreateDeadline(c *gin.Context) {
         StartDate:    startDate,
         EndDate:      endDate,
         CalendarID:   calendarID,
+        CardID:       cardID,
     }
 
     if _, err := govalidator.ValidateStruct(newDeadline); err != nil {
