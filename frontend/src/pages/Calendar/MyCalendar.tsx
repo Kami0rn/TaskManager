@@ -14,6 +14,7 @@ function MyCalendar(props: MyCalendarProps) {
   const [deadlines, setDeadlines] = useState<DeadlineInterface[]>([]);
   const [selectedDeadlineID, setSelectedDeadlineID] = useState<number | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
 
   useEffect(() => {
     // Fetch calendar data from the API using the provided function
@@ -35,19 +36,25 @@ function MyCalendar(props: MyCalendarProps) {
     fetchCalendarData();
   }, []);
 
+  // ...
   const handleDateSelect = (date: Dayjs) => {
-    const deadlineOnSelectedDate = deadlines.find(
+    const deadlinesOnSelectedDate = deadlines.filter(
       (deadline) =>
         date.isSame(dayjs(deadline.StartDate), "day") ||
         (date.isAfter(dayjs(deadline.StartDate), "day") &&
           date.isBefore(dayjs(deadline.EndDate), "day"))
     );
 
-    if (deadlineOnSelectedDate && deadlineOnSelectedDate.ID !== undefined) {
-      setSelectedDeadlineID(deadlineOnSelectedDate.ID);
+    // You can add additional logic here to determine which deadline to prioritize
+    const selectedDeadline = deadlinesOnSelectedDate[0];
+
+    if (selectedDeadline && selectedDeadline.ID !== undefined) {
+      setSelectedDeadlineID(selectedDeadline.ID);
       setIsModalVisible(true);
+      setSelectedDate(date);
     }
   };
+  // ...
 
   const dateCellRender = (date: Dayjs) => {
     const deadlinesOnDate = deadlines.filter(
@@ -88,7 +95,16 @@ function MyCalendar(props: MyCalendarProps) {
           <CalendarMenu
             isVisible={isModalVisible}
             deadlineID={selectedDeadlineID}
-            onClose={() => setIsModalVisible(false)}
+            onClose={() => {
+              setIsModalVisible(false);
+              setSelectedDate(null); // Reset selected date when closing the modal
+            }}
+            deadlines={deadlines.filter(
+              (deadline) =>
+                selectedDate?.isSame(dayjs(deadline.StartDate), "day") ||
+                (selectedDate?.isAfter(dayjs(deadline.StartDate), "day") &&
+                  selectedDate?.isBefore(dayjs(deadline.EndDate), "day"))
+            )}
           />
         )}
       </div>

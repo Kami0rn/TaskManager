@@ -1,11 +1,13 @@
 import React from "react";
 import { DeleteDeadlineByID } from "../../services/http/deadline/deadline";
 import Swal from "sweetalert2";
+import { DeadlineInterface } from "../../interfaces/Ideadline";
 
 interface CalendarMenuProps {
   isVisible: boolean;
   deadlineID: number | null;
   onClose: () => void;
+  deadlines: DeadlineInterface[];
 }
 
 async function handleDeleteDeadline(deadlineID: number | null) {
@@ -32,7 +34,7 @@ async function handleDeleteDeadline(deadlineID: number | null) {
   }
 }
 
-function CalendarMenu({ isVisible, deadlineID, onClose }: CalendarMenuProps) {
+function CalendarMenu({ isVisible, deadlineID, onClose,deadlines }: CalendarMenuProps) {
   const overlayClasses = `fixed top-0 left-0 w-full h-full bg-gray-800 opacity-50 z-50 ${
     isVisible ? "block" : "hidden"
   }`;
