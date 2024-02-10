@@ -53,7 +53,11 @@ func main() {
 	authorized.POST("/createDeadlineFromCalendarID", Controller.CreateDeadline)
 	authorized.DELETE("/deleteDeadlineFromID/:DeadlineId", Controller.DeleteDeadline)
 
-
+	r.GET("/comment/:cardID", Controller.GetCommentByCardID)
+	r.GET("/comment/edit/:commentID", Controller.GetCommentByCommentID)
+	r.POST("/comment", Controller.CreateComment)
+	r.PATCH("/comment", Controller.UpdateComment)
+	r.DELETE("/comment/:commentID", Controller.DeleteCommentByCommentID)
 
 
 

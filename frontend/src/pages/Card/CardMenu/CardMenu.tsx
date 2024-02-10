@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import UpdateCardMenu from "./UpdateCardMenu";
 import DeleteCardMenu from "./DeleteCardMenu";
 import CreateDeadline from "./CeateDeadline"
+import Comment from "../../comment/Component_Comment";
 
 function CardMenu() {
   const listIDForMenu = localStorage.getItem("cardIDForMenu");
@@ -108,6 +109,9 @@ function CardMenu() {
           </div>
         </div>
       )}
+      <div>
+        {/* <Comment /> */}
+      </div>
     </div>
   );
 }
